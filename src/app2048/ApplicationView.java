@@ -14,6 +14,7 @@ import javafx.scene.layout.GridPane;
         Label[] pane = new Label[2];
         Label a = new Label();
         Label b = new Label();
+         Label c = new Label();
         a.textProperty().bind(number.asString());
         b.textProperty().bind(number.asString());
 
