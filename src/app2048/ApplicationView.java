@@ -1,22 +1,25 @@
 
 package  app2048;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+import javax.swing.text.StyledEditorKit;
+
 import static app2048.Utilities.shuffleArray;
 
 
 public class ApplicationView extends GridPane {
-   GridPane board = new GridPane();
+   private GridPane board = new GridPane();
 
+    public GridPane getBoard() {
+        return board;
+    }
 
-   public GridPane drawBoard() {
-
-
-      SimpleIntegerProperty number = new SimpleIntegerProperty(2);
+    public GridPane drawBoard() {
       board.setMinSize(400, 400);
       board.setGridLinesVisible(true);
 
@@ -32,21 +35,14 @@ public class ApplicationView extends GridPane {
          numRow.setPercentHeight(100/rowCount);
          board.getRowConstraints().add(numRow);
       }
-
-
-      Label tile = new Label();
-      Label tile2 = new Label();
-      tile.textProperty().bind(number.asString());
-      tile.setMinSize(100,100);
-      tile2.textProperty().bind(number.asString());
-      tile2.setMinSize(100,100);
-      int[] xCoord = shuffleArray();
-      int[] yCoord = shuffleArray();
-
+      NodeOper addnode = new NodeOper();
+        board = addnode.addNode(board);
       return board;
 
 
    }
+
+
 }
 
 
