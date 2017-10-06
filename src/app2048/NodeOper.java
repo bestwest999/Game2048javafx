@@ -20,9 +20,13 @@ public class NodeOper {
         int[] yCoord = shuffleArray();
 
         for (int x = 0; x < xCoord.length-1;x++) {
-            for (int y=0; y < yCoord.length-1;y++) {
+            for (int y = 0; y < yCoord.length-1;y++) {
+                //if (!(board.getColumnIndex(tile) == xCoord[x] && board.getRowIndex(tile) == yCoord[y])){
+               // if (board.getChildren().get(2) == null ){
                 board.add(tile, xCoord[x], yCoord[y]);
                 return board;
+               // }
+
             }
         }
         return board;
