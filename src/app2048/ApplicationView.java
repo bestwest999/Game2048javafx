@@ -36,7 +36,9 @@ public class ApplicationView extends GridPane {
          board.getRowConstraints().add(numRow);
       }
       NodeOper addnode = new NodeOper();
-        board = addnode.addNode(board);
+        for (int i=0; i<15; i++) {
+            board = addnode.addNode(board);
+        }
       return board;
 
 

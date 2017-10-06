@@ -18,7 +18,13 @@ public class NodeOper {
         tile2.setMinSize(100,100);
         int[] xCoord = shuffleArray();
         int[] yCoord = shuffleArray();
-        board.add(tile,3,3);
+
+        for (int x = 0; x < xCoord.length-1;x++) {
+            for (int y=0; y < yCoord.length-1;y++) {
+                board.add(tile, xCoord[x], yCoord[y]);
+                return board;
+            }
+        }
         return board;
     }
 }
