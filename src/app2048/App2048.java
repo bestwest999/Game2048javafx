@@ -3,7 +3,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class app2048 extends Application {
+public class App2048 extends Application {
 
         public static void main(String[] args) {
         Application.launch(args);
