@@ -7,26 +7,28 @@ import static app2048.Utilities.shuffleArray;
 
 
 public class ApplicationView extends GridPane {
+   GridPane board = new GridPane();
 
-     public GridPane drawBoard() {
+   public GridPane drawBoard() {
+      board.setMinSize(400, 400);
+      board.setGridLinesVisible(true);
 
-        //pane[0].setVisible(false);
-        GridPane board = new GridPane();
-        board.setMinSize(400,400);
-        board.setGridLinesVisible(true);
-        return board;
-    }
+      return board;
+   }
 
-    public static void addNode(ApplicationView board) {
-       //GridPane board = board;
-       Label tile = new Tile();
-       int[] xCoord = shuffleArray();
-       int[] yCoord = shuffleArray();
-       for (int x=3; x>0; x++){
-          for (int y=3; y>0; y++) {
-          }
-       }
-    }
+   public void addNode() {
+      //GridPane b = new GridPane();
+      Label[] tile = new Tile[4];
+      int[] xCoord = shuffleArray();
+      int[] yCoord = shuffleArray();
+    //  for (int x = 3; x > 0; x--) {
+      //   for (int y = 3; y > 0; y--) {
+            board.add(tile[0], xCoord[0], yCoord[0]);
+            board.add(tile[1], xCoord[1], yCoord[1]);
 
- }
+        // }
+      //}
+   }
+}
+
 

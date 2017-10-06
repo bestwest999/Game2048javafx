@@ -1,6 +1,7 @@
 package app2048;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class App2048 extends Application {
@@ -11,6 +12,7 @@ public class App2048 extends Application {
     @Override
     public void start(Stage stage) {
         ApplicationView board = new ApplicationView();
+        //board.addNode();
         Scene scene = new Scene(board.drawBoard());
         stage.setScene(scene);
         stage.setTitle("Adding Children to a GridPane");
