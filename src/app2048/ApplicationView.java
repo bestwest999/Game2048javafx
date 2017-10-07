@@ -1,42 +1,52 @@
 
 package  app2048;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+
+import javax.swing.text.StyledEditorKit;
 
 import static app2048.Utilities.shuffleArray;
 
 
 public class ApplicationView extends GridPane {
-   GridPane board = new GridPane();
+   private GridPane board = new GridPane();
 
+    public GridPane getBoard() {
+        return board;
+    }
 
-   public GridPane drawBoard() {
-
-
-      SimpleIntegerProperty number = new SimpleIntegerProperty(2);
+    public GridPane drawBoard() {
       board.setMinSize(400, 400);
       board.setGridLinesVisible(true);
-      Label tile = new Label();
-      Label tile2 = new Label();
-      tile.textProperty().bind(number.asString());
-      tile.setMinSize(100,100);
-      tile2.textProperty().bind(number.asString());
-      tile2.setMinSize(100,100);
-      int[] xCoord = shuffleArray();
-      //System.out.println("a=" + xCoord[0] + "b=" + xCoord[1] + "c=" + xCoord[2] + "d=" + xCoord[3]);
-      int[] yCoord = shuffleArray();
-      //System.out.println("a=" + yCoord[0] + "b=" + yCoord[1] + "c=" + yCoord[2] + "d=" + yCoord[3]);
-      int a = xCoord[0];
-      int b = yCoord[1];
-      //  for (int x = 3; x > 0; x--) {
-      //   for (int y = 3; y > 0; y--) {
-            board.add(tile, (int)xCoord[3], (int)yCoord[3]);
-            board.add(tile2, (int)xCoord[2], (int)yCoord[2]);
+
+      int rowCount = 4;
+      int colCount = 4;
+      for (int i=0; i<4; i++){
+         ColumnConstraints numCol = new ColumnConstraints();
+         numCol.setPercentWidth(100.0/colCount);
+         board.getColumnConstraints().add(numCol);
+      }
+      for (int i=0; i<4; i++){
+         RowConstraints numRow = new RowConstraints();
+         numRow.setPercentHeight(100/rowCount);
+         board.getRowConstraints().add(numRow);
+      }
+
+      NodeOper addnode = new NodeOper();
+        addnode.addNode(board);
+        for (int i=0; i<15; i++) {
+            board = addnode.addRndNode(board);
+        }
       return board;
 
 
    }
+
+
 }
 
 

@@ -1,5 +1,9 @@
 package app2048;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
+
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -18,4 +22,27 @@ public class Utilities {
         }
         return ar;
     }
+
+
+    public static Boolean getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+        Boolean result = false;
+
+        ObservableList<Node> childrens = gridPane.getChildren();
+if(!(childrens == null)) {
+    return result;
+}
+
+        for (Node node : childrens) {
+            if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
+                result = true;
+                break;
+            }
+        }
+
+
+        return result;
+    }
+
+
+
 }
