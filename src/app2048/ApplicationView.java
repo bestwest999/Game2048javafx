@@ -35,9 +35,11 @@ public class ApplicationView extends GridPane {
          numRow.setPercentHeight(100/rowCount);
          board.getRowConstraints().add(numRow);
       }
+
       NodeOper addnode = new NodeOper();
+        addnode.addNode(board);
         for (int i=0; i<15; i++) {
-            board = addnode.addNode(board);
+            board = addnode.addRndNode(board);
         }
       return board;
 
