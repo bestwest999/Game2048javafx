@@ -31,8 +31,8 @@ public class ApplicationView extends GridPane {
       int b = yCoord[1];
       //  for (int x = 3; x > 0; x--) {
       //   for (int y = 3; y > 0; y--) {
-            board.add(tile, xCoord[1], yCoord[1]);
-            board.add(tile2, xCoord[0], yCoord[0]);
+            board.add(tile, (int)xCoord[3], (int)yCoord[3]);
+            board.add(tile2, (int)xCoord[2], (int)yCoord[2]);
       return board;
 
 
