@@ -20,8 +20,8 @@ public class NodeOper {
         //NodeOper first = new NodeOper();
         //board = first.addNode(board);
 
-        for (int x = 0; x < xCoord.length - 1;x++) {
-            for (int y = 0; y < yCoord.length - 1;y++) {
+        for (int x = 0; x < xCoord.length;x++) {
+            for (int y = 0; y < yCoord.length ;y++) {
 
                 if (getNodeByRowColumnIndex(xCoord[x], yCoord[y], board)) {
                     board.add(tile, xCoord[x], yCoord[y]);
