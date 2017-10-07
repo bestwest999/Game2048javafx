@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
+
 public class App2048 extends Application {
 
         public static void main(String[] args) {
@@ -17,5 +18,6 @@ public class App2048 extends Application {
         stage.setScene(scene);
         stage.setTitle("Adding Children to a GridPane");
         stage.show();
+
     }
 }

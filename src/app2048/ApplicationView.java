@@ -29,6 +29,7 @@ public class ApplicationView extends GridPane {
          ColumnConstraints numCol = new ColumnConstraints();
          numCol.setPercentWidth(100.0/colCount);
          board.getColumnConstraints().add(numCol);
+          //input.moveTiles(board);
       }
       for (int i=0; i<4; i++){
          RowConstraints numRow = new RowConstraints();
@@ -42,8 +43,7 @@ public class ApplicationView extends GridPane {
             board = addnode.addRndNode(board);
       return board;
 
-
-   }
+    }
 
 
 }
