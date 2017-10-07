@@ -24,20 +24,21 @@ public class Utilities {
     }
 
 
-    public static Boolean getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
+    public static Boolean checkNodeSpaceIsEmpty (final int column, final int row, GridPane mainBoard) {
         Boolean result = true;
 
-        ObservableList<Node> childrens = gridPane.getChildren();
+        ObservableList<Node> childrens = mainBoard.getChildren();
 //if(!(childrens == null)) {
 //    return result;
 //}
 
         for (Node node : childrens) {
-            if (gridPane.getRowIndex(node) == column && gridPane.getColumnIndex(node) == row) {
-                System.out.println("row= "+ gridPane.getRowIndex(node)+ "col= " + gridPane.getColumnIndex(node) );
+            if (mainBoard.getRowIndex(node) == row && mainBoard.getColumnIndex(node) == column) {
+                System.out.println("row= "+ mainBoard.getRowIndex(node)+ "col= " + mainBoard.getColumnIndex(node) );
                 result = false;
                 return result;
                // break;
+
             }
         }
 

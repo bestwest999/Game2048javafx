@@ -38,7 +38,7 @@ public class ApplicationView extends GridPane {
 
       NodeOper addnode = new NodeOper();
         addnode.addNode(board);
-        for (int i=0; i<1; i++)
+        for (int i=0; i<15; i++)
             board = addnode.addRndNode(board);
       return board;
 
