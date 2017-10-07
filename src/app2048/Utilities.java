@@ -25,17 +25,19 @@ public class Utilities {
 
 
     public static Boolean getNodeByRowColumnIndex (final int row, final int column, GridPane gridPane) {
-        Boolean result = false;
+        Boolean result = true;
 
         ObservableList<Node> childrens = gridPane.getChildren();
-if(!(childrens == null)) {
-    return result;
-}
+//if(!(childrens == null)) {
+//    return result;
+//}
 
         for (Node node : childrens) {
-            if (gridPane.getRowIndex(node) == row && gridPane.getColumnIndex(node) == column) {
-                result = true;
-                break;
+            if (gridPane.getRowIndex(node) == column && gridPane.getColumnIndex(node) == row) {
+                System.out.println("row= "+ gridPane.getRowIndex(node)+ "col= " + gridPane.getColumnIndex(node) );
+                result = false;
+                return result;
+               // break;
             }
         }
 

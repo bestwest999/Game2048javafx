@@ -21,7 +21,7 @@ public class ApplicationView extends GridPane {
 
     public GridPane drawBoard() {
       board.setMinSize(400, 400);
-      board.setGridLinesVisible(true);
+      //board.setGridLinesVisible(true);
 
       int rowCount = 4;
       int colCount = 4;
@@ -38,9 +38,8 @@ public class ApplicationView extends GridPane {
 
       NodeOper addnode = new NodeOper();
         addnode.addNode(board);
-        for (int i=0; i<15; i++) {
+        for (int i=0; i<15; i++)
             board = addnode.addRndNode(board);
-        }
       return board;
 
 

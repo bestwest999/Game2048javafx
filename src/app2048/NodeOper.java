@@ -17,19 +17,25 @@ public class NodeOper {
         tile.setMinSize(100, 100);
         int[] xCoord = shuffleArray();
         int[] yCoord = shuffleArray();
+        //NodeOper first = new NodeOper();
+        //board = first.addNode(board);
 
-        for (int x = 0; x < xCoord.length - 1; x++) {
-            for (int y = 0; y < yCoord.length - 1; y++) {
+        for (int x = 0; x < xCoord.length - 1;x++) {
+            for (int y = 0; y < yCoord.length - 1;y++) {
 
                 if (getNodeByRowColumnIndex(xCoord[x], yCoord[y], board)) {
                     board.add(tile, xCoord[x], yCoord[y]);
                     return board;
-                    //break;
+
                 }
+
+                }
+
             }
-        }
         return board;
-    }
+        }
+
+
 
     public GridPane addNode(GridPane Mainboard) {
 
@@ -38,7 +44,7 @@ public class NodeOper {
         Label tile = new Label();
         tile.textProperty().bind(number.asString());
         tile.setMinSize(100, 100);
-        board.add(tile, 0, 0);
+        board.add(tile, 3, 3);
         return board;
 
 
