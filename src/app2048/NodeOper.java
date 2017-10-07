@@ -17,7 +17,7 @@ public class NodeOper {
         tile.setMinSize(100, 100);
         int[] xCoord = shuffleArray();
         int[] yCoord = shuffleArray();
-        //NodeOper first = new NodeOper();
+        //NodeOper first = new NodeOper();jgh
         //board = first.addNode(board);
 
         for (int x = 0; x < xCoord.length;x++) {
