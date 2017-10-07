@@ -1,35 +1,51 @@
 
 package  app2048;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+
+import javax.swing.text.StyledEditorKit;
+
+import static app2048.Utilities.shuffleArray;
 
 
+public class ApplicationView extends GridPane {
+   private GridPane board = new GridPane();
 
- public class ApplicationView {
-
-    private SimpleIntegerProperty number = new SimpleIntegerProperty(2);
-
-     public GridPane drawBoard() {
-        Label[] pane = new Label[2];
-        Label a = new Label();
-        Label b = new Label();
-         Label c = new Label();
-        a.textProperty().bind(number.asString());
-        b.textProperty().bind(number.asString());
-
-
-        pane[0] = a;
-        pane[1] = b;
-        pane[0].setMinSize(100, 100);
-        pane[1].setMinSize(100, 100);
-        pane[0].setVisible(false);
-        GridPane board = new GridPane();
-        board.setMinSize(400,400);
-        board.add(pane[0],0,0);
-        board.add(pane[1],1,0);
-        board.setGridLinesVisible(true);
+    public GridPane getBoard() {
         return board;
     }
+
+    public GridPane drawBoard() {
+      board.setMinSize(400, 400);
+      //board.setGridLinesVisible(true);
+
+      int rowCount = 4;
+      int colCount = 4;
+      for (int i=0; i<4; i++){
+         ColumnConstraints numCol = new ColumnConstraints();
+         numCol.setPercentWidth(100.0/colCount);
+         board.getColumnConstraints().add(numCol);
+          //input.moveTiles(board);
+      }
+      for (int i=0; i<4; i++){
+         RowConstraints numRow = new RowConstraints();
+         numRow.setPercentHeight(100/rowCount);
+         board.getRowConstraints().add(numRow);
+      }
+
+      NodeOper addnode = new NodeOper();
+        addnode.addNode(board);
+        for (int i=0; i<15; i++)
+            board = addnode.addRndNode(board);
+      return board;
+
+    }
+
+
 }
+
 
