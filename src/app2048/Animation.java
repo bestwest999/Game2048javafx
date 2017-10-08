@@ -3,6 +3,8 @@ package app2048;
 import javafx.animation.TranslateTransition;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
@@ -17,13 +19,24 @@ public class Animation {
         for (Node node : childrens) {
 
             TranslateTransition tt = new TranslateTransition(Duration.seconds(2), node);
-            tt.setFromX(board.getWidth());
-            tt.setToX(-1.0 * node.getLayoutBounds().getWidth());
-            tt.setCycleCount(3);
+            tt.setFromX(node.getLayoutX());
+            tt.setToX(board.getWidth() );
+            tt.setCycleCount(1);
             tt.setAutoReverse(true);
             tt.play();
         }
 
 
     }
+
+    public  void handle(KeyEvent e, ApplicationView view) {
+        Animation animation= new Animation();
+        String type = e.getEventType().getName();
+        KeyCode keyCode = e.getCode();
+        System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
+        animation.moveTiles(view);
+
+
+    }
+
 }

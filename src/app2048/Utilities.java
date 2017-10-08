@@ -50,14 +50,5 @@ public class Utilities {
 
 
 
-    public static void handle(KeyEvent e, ApplicationView view) {
-        Animation animation= new Animation();
-        String type = e.getEventType().getName();
-        KeyCode keyCode = e.getCode();
-        System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
-        animation.moveTiles(view);
-
-
-    }
 
 }
