@@ -1,7 +1,6 @@
 package app2048;
 
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -22,8 +21,8 @@ public class NodeOper {
         //NodeOper first = new NodeOper();jgh
         //board = first.addNode(board);
 
-        for (int x = 0; x < xCoordCol.length;x++) {
-            for (int y = 0; y < yCoordRow.length ;y++) {
+        for (int x = 0; x < xCoordCol.length; x++) {
+            for (int y = 0; y < yCoordRow.length; y++) {
 
                 if (checkNodeSpaceIsEmpty(xCoordCol[x], yCoordRow[y], board)) {
                     board.add(tile, xCoordCol[x], yCoordRow[y]);
@@ -32,12 +31,11 @@ public class NodeOper {
 
                 }
 
-                }
-
             }
-        return board;
-        }
 
+        }
+        return board;
+    }
 
 
     public GridPane addNode(GridPane Mainboard) {

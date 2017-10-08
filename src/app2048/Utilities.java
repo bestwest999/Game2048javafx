@@ -2,6 +2,8 @@ package app2048;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 import java.util.Random;
@@ -47,5 +49,15 @@ public class Utilities {
     }
 
 
+
+    public static void handle(KeyEvent e, ApplicationView view) {
+        Animation animation= new Animation();
+        String type = e.getEventType().getName();
+        KeyCode keyCode = e.getCode();
+        System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
+        animation.moveTiles(view);
+
+
+    }
 
 }

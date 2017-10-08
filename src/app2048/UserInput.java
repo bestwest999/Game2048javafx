@@ -1,41 +1,19 @@
-package app2048;
-import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import static javafx.scene.input.KeyEvent.KEY_PRESSED;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-public class UserInput  {
 
-    public  void moveTiles(ApplicationView view){
-        GridPane board = view.getBoard();
-        board.setOnKeyPressed(e -> handle(e));
+
+
+
+
+
         //ObservableList<Node> childrens = board.getChildren();
 
         //if(!(childrens == null)) {
 //    return result;
 //}
         //for (Node node : childrens) {
-          // node.setOnKeyPressed(e -> handle(e) );
-            }
+        // node.setOnKeyPressed(e -> handle(e) );
 
 
-    public void handle (KeyEvent e){
-        String type = e.getEventType().getName();
-        KeyCode keyCode = e.getCode();
-        System.out.println(type + ": Key Code=" + keyCode.getName() +
-                ", Text=" + e.getText());
 
-    }
-}
 
 
 
@@ -47,6 +25,18 @@ public class UserInput  {
 
     /* public static void main(String[] args) {
         Application.launch(args);
+
+
+        TranslateTransition tt = new TranslateTransition(Duration.seconds(2), msg);
+tt.setFromX(scene.getWidth());
+tt.setToX(-1.0 * msg.getLayoutBounds().getWidth());
+tt.setCycleCount(TranslateTransition.INDEFINITE);
+tt.setAutoReverse(true);
+tt.play();
+
+
+
+
     }
     @Override
     public void start(Stage stage) {
