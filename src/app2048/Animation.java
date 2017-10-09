@@ -23,55 +23,56 @@ public class Animation {
 
     private GridPane board;
     private ApplicationView view;
+    static boolean collision = false;
+    TranslateTransition tt;
+
+    public Animation() {
+    }
 
     public Animation(ApplicationView applicationView) {
-         view = applicationView;
+        view = applicationView;
         board = view.getBoard();
+
 
     }
 
     public void moveTiles() {
-        //GridPane board = this.view.getBoard();
+        GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
+        ObservableList<Bounds> bounds = FXCollections.observableArrayList();
 
 
-        for (Node node : childrens) {
+            for (Node node : childrens) {
 
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
-            tt.setByX(-100);
-            tt.setCycleCount(1);
-            tt.play();
+                node.boundsInParentProperty().addListener(Animation::onChanged);
+                TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+                tt.setByX(-100);
+                tt.setCycleCount(1);
+                tt.play();
 
-        }
-        checkColission(childrens);
+            }
+
+
 
     }
 
-    public  void handle(KeyEvent e) {
+
+    public void handle(KeyEvent e) {
         //Animation animation= new Animation(view);
         String type = e.getEventType().getName();
         KeyCode keyCode = e.getCode();
         System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
-        this.moveTiles();
+        moveTiles();
 
 
     }
 
-    void checkColission (ObservableList<Node> tiles) {
-        ObservableList<Bounds> bounds = FXCollections.observableArrayList();
 
-        for (Node node : tiles) {
-            node.boundsInParentProperty().addListener(Animation::onChanged);
-
-            }
-
-        }
-
-
-
-    public static void onChanged (ObservableValue<? extends Bounds> change, Bounds oldValue, Bounds newValue ){
+    public static void onChanged(ObservableValue<? extends Bounds> change, Bounds oldValue, Bounds newValue) {
         System.out.println(change.toString());
+        collision = true;
+
         //node.getBoundsInParent().intersects(board.getBoundsInLocal());
 
-}
+    }
 }
