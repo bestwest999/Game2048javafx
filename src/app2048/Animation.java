@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 public class Animation {
 
-    GridPane board;
+    private GridPane board;
     private ApplicationView view;
 
     public Animation(ApplicationView applicationView) {

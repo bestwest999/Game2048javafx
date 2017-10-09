@@ -12,10 +12,17 @@ import static app2048.Utilities.shuffleArray;
 
 
 public class NodeOper {
+
+    GridPane board;
+
+    public NodeOper(GridPane board) {
+        this.board = board;
+    }
+
     public GridPane addRndNode(GridPane Mainboard) {
 
         SimpleIntegerProperty number = new SimpleIntegerProperty(2);
-        GridPane board = Mainboard;
+        //GridPane board = Mainboard;
         Label tile = new Label();
         tile.textProperty().bind(number.asString());
         tile.setMinSize(100, 100);

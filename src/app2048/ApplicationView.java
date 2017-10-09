@@ -35,7 +35,7 @@ public class ApplicationView extends GridPane {
         board.setFocusTraversable(true);
         requestFocus();
 
-        NodeOper addnode = new NodeOper();
+        NodeOper addnode = new NodeOper(board);
         addnode.addNode(board);
         for (int i = 0; i < 1; i++)
             board = addnode.addRndNode(board);
