@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-
+j
 
 public class App2048 extends Application {
 
