@@ -1,7 +1,18 @@
 package app2048;
 
+import com.sun.javafx.geom.BaseBounds;
+import com.sun.javafx.geom.transform.BaseTransform;
+import com.sun.javafx.jmx.MXNodeAlgorithm;
+import com.sun.javafx.jmx.MXNodeAlgorithmContext;
+import com.sun.javafx.sg.prism.NGNode;
 import javafx.animation.TranslateTransition;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -30,8 +41,9 @@ public class Animation {
             tt.setByX(-100);
             tt.setCycleCount(1);
             tt.play();
-        }
 
+        }
+        checkColission(childrens);
 
     }
 
@@ -45,4 +57,21 @@ public class Animation {
 
     }
 
+    void checkColission (ObservableList<Node> tiles) {
+        ObservableList<Bounds> bounds = FXCollections.observableArrayList();
+
+        for (Node node : tiles) {
+            node.boundsInParentProperty().addListener(Animation::onChanged);
+
+            }
+
+        }
+
+
+
+    public static void onChanged (ObservableValue<? extends Bounds> change, Bounds oldValue, Bounds newValue ){
+        System.out.println(change.toString());
+        //node.getBoundsInParent().intersects(board.getBoundsInLocal());
+
+}
 }
