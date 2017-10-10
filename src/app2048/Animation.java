@@ -73,7 +73,8 @@ public class Animation {
         for (Node tile : children) {
 
             if (node != tile) if (node.getBoundsInParent().intersects(tile.getBoundsInParent()) )
-
+            if(node.getBoundsInParent().getMaxY() == tile.getBoundsInParent().getMaxY() )
+           
             {         //     && (node.getLayoutX()!=node.getLayoutX())
                 System.out.println("LayoutX = " + node.getBoundsInParent() + "LayoutY = " + node.getLayoutY());
                 System.out.println("LayoutX = " + tile.getBoundsInParent()+ "LayoutY = " + node.getLayoutY());
