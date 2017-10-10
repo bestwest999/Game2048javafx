@@ -24,81 +24,87 @@ public class Animation {
 
     private GridPane board;
     private ApplicationView view;
-   static boolean  colis = false;
-    BooleanBinding collission = new BooleanBinding() {
-        @Override
-        protected boolean computeValue() {
-            return colis;
-        }};
 
 
-        public Animation(ApplicationView applicationView) {
-            view = applicationView;
-            board = view.getBoard();
 
+    public Animation(ApplicationView applicationView) {
+        view = applicationView;
+        board = view.getBoard();
+
+
+    }
+
+    public void moveTiles() {
+        GridPane board = this.view.getBoard();
+        ObservableList<Node> childrens = board.getChildren();
+        ObservableList<Bounds> bounds = FXCollections.observableArrayList();
+
+
+        for (Node node : childrens) {
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+            bounds.add(node.getBoundsInParent());
+            node.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
+                @Override
+                public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
+
+                    if (newValue.getMinX() < 0) {
+                        tt.pause();
+                        System.out.println("Fuck off");
+
+                    } else if (collisionCheck(childrens, node)) {
+                        tt.pause();
+                        System.out.println("Fuck node");
+
+
+                    }
+                }
+            });
+
+            tt.setByX(-500);
+            tt.setCycleCount(2);
+            tt.play();
 
         }
+    }
 
-        public void moveTiles() {
-            GridPane board = this.view.getBoard();
-            ObservableList<Node> childrens = board.getChildren();
-            ObservableList<Bounds> bounds = FXCollections.observableArrayList();
+    public boolean collisionCheck(ObservableList<Node> children, Node node) {
 
 
-            for (Node node : childrens) {
-                TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
-                node.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
-                                                              @Override
-                                                              public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
+        for (Node tile : children) {
 
-                                                                  if (newValue.getMinX() < 0) {
-                                                                        tt.stop();
-                                                                      System.out.println("Fuck off");
+            if (node != tile) if (node.getBoundsInParent().intersects(tile.getBoundsInParent()) )
 
-                                                                  }
-                                                              }
-                                                          });
-                       
-                tt.setByX(-100);
-                tt.setCycleCount(1);
-                tt.play();
+            {         //     && (node.getLayoutX()!=node.getLayoutX())
+                System.out.println("LayoutX = " + node.getBoundsInParent() + "LayoutY = " + node.getLayoutY());
+                System.out.println("LayoutX = " + tile.getBoundsInParent()+ "LayoutY = " + node.getLayoutY());
 
-
+                return true;
             }
+
         }
-
-       // static public void collisionCheck(ObservableList<Node> children , Node node,  ) {
-
-
-
-            //System.out.println("LayoutX = " + tile.getLayoutX() + "TranslateX = " + tile.getTranslateX() + "board witdth = " + board.getWidth());
-            //System.out.println("getBoundsInParent = " + tile.getBoundsInParent() + "getBoundsInLocal = " + tile.getBoundsInLocal() + "getBoundsInLocal = " + board.getBoundsInLocal().getMaxX());
+        return false;
+    }
 
 
+   // System.out.println("LayoutX = " + tile.getLayoutX() + "TranslateX = " + tile.getTranslateX() + "board witdth = " + board.getWidth());
+    //System.out.println("getBoundsInParent = " + tile.getBoundsInParent() + "getBoundsInLocal = " + tile.getBoundsInLocal() + "getBoundsInLocal = " + board.getBoundsInLocal().getMaxX());
 
-        public void handle(KeyEvent e) {
-            //Animation animation= new Animation(view);
+
+    public void handle(KeyEvent e) {
+       // for(int i=0; i<3; i++) {
             String type = e.getEventType().getName();
             KeyCode keyCode = e.getCode();
             System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
             moveTiles();
+            //moveTiles();
+        //}
 
 
-        }
-
-
-        public static void onChanged(ObservableValue<? extends Bounds> change, Bounds oldValue, Bounds newValue) {
-            //System.out.println(change.toString());
-            //System.out.println(newValue.getMinX());
-
-
-            if (newValue.getMinX() < 0) {
-
-                System.out.println("Fuck off");
-
-            }
-        }
 
     }
+
+
+}
+
 
 

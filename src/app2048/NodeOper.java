@@ -24,9 +24,9 @@ public class NodeOper {
         SimpleIntegerProperty number = new SimpleIntegerProperty(2);
         Label tile = new Label();
         tile.textProperty().bind(number.asString());
-        tile.setMinSize(100, 100);
+        tile.setMaxSize(100, 100);
         tile.setAlignment(Pos.CENTER);
-        tile.setStyle("-fx-font-size: 50px; -fx-font-weight: bold; -fx-text-fill: red; -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );-fx-background-color: yellow ");
+        tile.setStyle("-fx-font-size: 50px; -fx-font-weight: bold; -fx-text-fill: red; -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );-fx-background-color: yellow;-fx-border-width: 4.0; -fx-border-color: blue;");
         int[] xCoordCol = shuffleArray();
         int[] yCoordRow = shuffleArray();
         //NodeOper first = new NodeOper();jgh
@@ -57,7 +57,7 @@ public class NodeOper {
         tile.textProperty().bind(number.asString());
         tile.setMinSize(100, 100);
         tile.setAlignment(Pos.CENTER);
-        tile.setStyle("-fx-font-size: 50px; -fx-font-weight: bold; -fx-text-fill: red; -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );-fx-background-color: yellow ");
+        tile.setStyle("-fx-font-size: 50px; -fx-font-weight: bold; -fx-text-fill: red; -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );-fx-background-color: yellow;-fx-border-width: 4.0; -fx-border-color: blue;");
         board.add(tile, 3, 3);
         return board;
 
