@@ -58,7 +58,7 @@ public class Animation {
                                                                   }
                                                               }
                                                           });
-                        TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+                       
                 tt.setByX(-100);
                 tt.setCycleCount(1);
                 tt.play();
@@ -73,7 +73,7 @@ public class Animation {
 
             //System.out.println("LayoutX = " + tile.getLayoutX() + "TranslateX = " + tile.getTranslateX() + "board witdth = " + board.getWidth());
             //System.out.println("getBoundsInParent = " + tile.getBoundsInParent() + "getBoundsInLocal = " + tile.getBoundsInLocal() + "getBoundsInLocal = " + board.getBoundsInLocal().getMaxX());
-        }
+
 
 
         public void handle(KeyEvent e) {
