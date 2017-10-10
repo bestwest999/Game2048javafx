@@ -22,9 +22,6 @@ public class App2048 extends Application {
         Animation animation = new Animation(view);
         scene.setOnKeyPressed(e-> animation.handle(e) );
         stage.setTitle("Adding Children to a GridPane");
-        //board2.setFocusTraversable(true);
-        //board2.requestFocus();
-        // board2.setOnKeyPressed(e -> userInput.handle(e));
         stage.show();
 
 
