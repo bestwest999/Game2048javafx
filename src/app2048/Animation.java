@@ -42,18 +42,22 @@ public class Animation {
         ObservableList<Bounds> bounds = FXCollections.observableArrayList();
 
 
-            for (Node node : childrens) {
+        for (Node node : childrens) {
 
-                node.boundsInParentProperty().addListener(Animation::onChanged);
-                TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
-                tt.setByX(-100);
-                tt.setCycleCount(1);
-                tt.play();
+            node.boundsInParentProperty().addListener(Animation::onChanged);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+            tt.setByX(-100);
+            tt.setCycleCount(1);
+            tt.play();
 
-            }
+        }
+    }
 
+    public void collisionCheck() {
 
-
+        tt.stop();
+        // System.out.println("LayoutX = " +  tile.getLayoutX() +  "TranslateX = " + tile.getTranslateX() + "board witdth = " + board.getWidth());
+        // System.out.println("getBoundsInParent = " +  tile.getBoundsInParent() +  "getBoundsInLocal = " + tile.getBoundsInLocal() + "getBoundsInLocal = " + board.getBoundsInLocal().getMaxX());
     }
 
 
@@ -65,15 +69,19 @@ public class Animation {
         moveTiles();
 
 
-
     }
 
 
-    public static void onChanged(ObservableValue<? extends Bounds> change, Bounds oldValue, Bounds newValue) {
-        System.out.println(change.toString());
-        collision = true;
 
-        //node.getBoundsInParent().intersects(board.getBoundsInLocal());
+    public static void onChanged (ObservableValue<? extends Bounds> change, Bounds oldValue, Bounds newValue) {
+        //System.out.println(change.toString());
+        System.out.println(newValue.getMinX());
 
-    }
-}
+        if (newValue.getMinX() < 0) {
+            //collision = true;
+            System.out.println("Fuck off");
+
+        }
+
+
+    }}
