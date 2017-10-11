@@ -1,5 +1,6 @@
 package app2048;
 
+import com.sun.corba.se.impl.orb.ParserTable;
 import com.sun.javafx.geom.BaseBounds;
 import com.sun.javafx.geom.transform.BaseTransform;
 import com.sun.javafx.jmx.MXNodeAlgorithm;
@@ -24,7 +25,6 @@ public class Animation {
 
     private GridPane board;
     private ApplicationView view;
-
 
 
     public Animation(ApplicationView applicationView) {
@@ -60,8 +60,8 @@ public class Animation {
                 }
             });
 
-            tt.setByX(-500);
-            tt.setCycleCount(2);
+            tt.setByX(-300);
+            tt.setCycleCount(1);
             tt.play();
 
         }
@@ -70,36 +70,41 @@ public class Animation {
     public boolean collisionCheck(ObservableList<Node> children, Node node) {
 
 
-        for (Node tile : children) {
+            for (Node tile : children) {
 
-            if (node != tile) if (node.getBoundsInParent().intersects(tile.getBoundsInParent()) )
-            if(node.getBoundsInParent().getMaxY() == tile.getBoundsInParent().getMaxY() )
-           
-            {         //     && (node.getLayoutX()!=node.getLayoutX())
-                System.out.println("LayoutX = " + node.getBoundsInParent() + "LayoutY = " + node.getLayoutY());
-                System.out.println("LayoutX = " + tile.getBoundsInParent()+ "LayoutY = " + node.getLayoutY());
+                if (node != tile) if (node.getBoundsInParent().intersects(tile.getBoundsInParent()))
+                    if (node.getBoundsInParent().getMaxY() == tile.getBoundsInParent().getMaxY())
+                        if (node.getBoundsInParent().getMinX() > tile.getBoundsInParent().getMinX())
 
-                return true;
+                        {         //     && (node.getLayoutX()!=node.getLayoutX())
+                            System.out.println("LayoutX = " + node.getBoundsInParent() + "LayoutY = " + node.getLayoutY());
+                            System.out.println("LayoutX = " + tile.getBoundsInParent() + "LayoutY = " + node.getLayoutY());
+
+                            return true;
+                        }
+
             }
 
-        }
+
         return false;
     }
 
 
-   // System.out.println("LayoutX = " + tile.getLayoutX() + "TranslateX = " + tile.getTranslateX() + "board witdth = " + board.getWidth());
+    // System.out.println("LayoutX = " + tile.getLayoutX() + "TranslateX = " + tile.getTranslateX() + "board witdth = " + board.getWidth());
     //System.out.println("getBoundsInParent = " + tile.getBoundsInParent() + "getBoundsInLocal = " + tile.getBoundsInLocal() + "getBoundsInLocal = " + board.getBoundsInLocal().getMaxX());
 
 
     public void handle(KeyEvent e) {
-       // for(int i=0; i<3; i++) {
-            String type = e.getEventType().getName();
-            KeyCode keyCode = e.getCode();
-            System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
-            moveTiles();
-            //moveTiles();
-        //}
+        // for(int i=0; i<3; i++) {
+        String type = e.getEventType().getName();
+        KeyCode keyCode = e.getCode();
+        System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
+        moveTiles();
 
+        // moveTiles();
+        //moveTiles();
+
+        //}
 
 
     }
