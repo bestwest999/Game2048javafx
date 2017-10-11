@@ -2,6 +2,8 @@ package app2048;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 import java.util.Random;
@@ -45,6 +47,7 @@ public class Utilities {
 
         return result;
     }
+
 
 
 
