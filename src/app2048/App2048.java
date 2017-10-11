@@ -20,7 +20,9 @@ public class App2048 extends Application {
 
         stage.setScene(scene);
         Animation animation = new Animation(view);
+        for (int i=0; i<2; i++)
         scene.setOnKeyPressed(e-> animation.handle(e) );
+
         stage.setTitle("Adding Children to a GridPane");
         stage.show();
 
