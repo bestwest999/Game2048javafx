@@ -13,8 +13,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
+
 import java.util.Comparator;
-import java.util.Observable;
+
 
 public class Animation {
 
@@ -22,50 +23,44 @@ public class Animation {
     private ApplicationView view;
 
 
-
     public Animation(ApplicationView applicationView) {
         view = applicationView;
         board = view.getBoard();
 
 
-
     }
 
-    public void moveTiles() {
+    public void moveLeft() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
         ObservableList<Bounds> bounds = FXCollections.observableArrayList();
 
         Comparator<Node> comparator = new Comparator<Node>() {
-           @Override
-          public int compare(Node node1, Node node2) {
-             return ((int) node1.getBoundsInParent().getMinX() - (int) node2.getBoundsInParent().getMinX());
-        }
-         };
+            @Override
+            public int compare(Node node1, Node node2) {
+                return ((int) node1.getBoundsInParent().getMinX() - (int) node2.getBoundsInParent().getMinX());
+            }
+        };
         SortedList<Node> sorted = new SortedList<Node>(childrens, comparator);
-
 
 
         for (Node node : sorted) {
             TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
-            // ObservableList<Node> childrens = board.getChildren();
+
 
             bounds.add(node.getBoundsInParent());
 
 
-
-
-           node.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
+            node.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
                 @Override
                 public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-
 
 
                     if (newValue.getMinX() < 0) {
                         tt.pause();
                         System.out.println("Fuck off");
 
-                    } else if (collisionCheck(bounds , node)) {
+                    } else if (leftCollisionCheck(bounds, node)) {
                         tt.pause();
                         System.out.println("Fuck node");
 
@@ -78,13 +73,13 @@ public class Animation {
 
             });
 
-                tt.setByX(-400);
-                tt.setCycleCount(3);
-                tt.play();
+            tt.setByX(-400);
+            tt.setCycleCount(3);
+            tt.play();
         }
     }
 
-    public boolean collisionCheck(ObservableList<Bounds> children, Node node) {
+    public boolean leftCollisionCheck(ObservableList<Bounds> children, Node node) {
 
         System.out.println(" before LayoutX = " + node.getBoundsInParent().getMinX());
 
@@ -95,11 +90,11 @@ public class Animation {
                 if (node.getBoundsInParent().getMaxY() == tile.getMaxY())
                     if (node.getBoundsInParent().getMinX() > tile.getMinX())
 
-                    {       
+                    {
 
 
                         return true;
-                    } else  {
+                    } else {
                         System.out.println("bad");
                         return false;
 
@@ -116,11 +111,17 @@ public class Animation {
 
 
     public void handle(KeyEvent e) {
-        // for(int i=0; i<3; i++) {
         String type = e.getEventType().getName();
         KeyCode keyCode = e.getCode();
         System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
-        moveTiles();
+        if (e.getCode() == KeyCode.LEFT) {
+            moveLeft();
+        }
+        else if (e.getCode() == KeyCode.RIGHT) {
+            moveRight();
+        } else{
+            System.out.println("Do nothing");
+        }
     }
 
 
