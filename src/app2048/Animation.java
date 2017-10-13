@@ -86,7 +86,7 @@ public class Animation {
 
     public boolean collisionCheck(ObservableList<Bounds> children, Node node) {
 
-        //System.out.println("LayoutX = " + node.getBoundsInParent().getMinX());
+        System.out.println(" before LayoutX = " + node.getBoundsInParent().getMinX());
 
 
         for (Bounds tile : children) {
@@ -95,14 +95,13 @@ public class Animation {
                 if (node.getBoundsInParent().getMaxY() == tile.getMaxY())
                     if (node.getBoundsInParent().getMinX() > tile.getMinX())
 
-                    {         //     && (node.getLayoutX()!=node.getLayoutX())
-                        // System.out.println("LayoutX = " + node.getBoundsInParent() + "LayoutY = " + node.getLayoutY());
-                        //System.out.println("LayoutX = " + tile.getBoundsInParent() + "LayoutY = " + node.getLayoutY());
+                    {       
+
 
                         return true;
-                    } else if (node.getBoundsInParent().getMinX() > tile.getMinX()) {
+                    } else  {
                         System.out.println("bad");
-                        return true;
+                        return false;
 
                     }
         }
