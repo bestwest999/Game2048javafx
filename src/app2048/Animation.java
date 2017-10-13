@@ -79,9 +79,62 @@ public class Animation {
         }
     }
 
+    public void moveRight() {
+        GridPane board = this.view.getBoard();
+        ObservableList<Node> childrens = board.getChildren();
+        ObservableList<Bounds> bounds = FXCollections.observableArrayList();
+
+        Comparator<Node> comparator = new Comparator<Node>() {
+            @Override
+            public int compare(Node node1, Node node2) {
+                return ((int) node1.getBoundsInParent().getMinX() - (int) node2.getBoundsInParent().getMinX());
+            }
+        };
+        SortedList<Node> sorted = new SortedList<Node>(childrens, comparator.reversed());
+
+
+        for (Node node : sorted) {
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+
+
+            bounds.add(node.getBoundsInParent());
+
+
+            node.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
+                @Override
+                public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
+
+
+                    if (newValue.getMaxX() > 400) {
+                        tt.pause();
+                        System.out.println("Fuck off");
+
+                    } else if (rightCollisionCheck(bounds, node)) {
+                        tt.pause();
+                        System.out.println("Fuck node");
+
+                    }
+                    bounds.remove(oldValue);
+                    bounds.add(newValue);
+
+
+                }
+
+            });
+
+            tt.setByX(400);
+            tt.setCycleCount(3);
+            tt.play();
+        }
+    }
+
+
+
+
+
     public boolean leftCollisionCheck(ObservableList<Bounds> children, Node node) {
 
-        System.out.println(" before LayoutX = " + node.getBoundsInParent().getMinX());
+       // System.out.println(" before LayoutX = " + node.getBoundsInParent().getMinX());
 
 
         for (Bounds tile : children) {
@@ -104,6 +157,35 @@ public class Animation {
 
         return false;
     }
+
+
+
+    public boolean rightCollisionCheck(ObservableList<Bounds> children, Node node) {
+
+       // System.out.println(" before LayoutX = " + node.getBoundsInParent().getMinX());
+
+
+        for (Bounds tile : children) {
+
+            if (node.getBoundsInParent() != tile) if (node.getBoundsInParent().intersects(tile))
+                if (node.getBoundsInParent().getMaxY() == tile.getMaxY())
+                    if (node.getBoundsInParent().getMinX() < tile.getMinX())
+
+                    {
+
+
+                        return true;
+                    } else {
+                        System.out.println("bad");
+                        return false;
+
+                    }
+        }
+
+
+        return false;
+    }
+
 
 
     // System.out.println("LayoutX = " + tile.getLayoutX() + "TranslateX = " + tile.getTranslateX() + "board witdth = " + board.getWidth());
