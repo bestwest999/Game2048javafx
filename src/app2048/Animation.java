@@ -78,6 +78,54 @@ public class Animation {
         }
     }
 
+       /*
+     moveRight() move all present tiles to left
+     @param firstRowDist, secondRowDist, thirdRowDist, fouthRoWDist - distance not filled by tilse that are allready moved right
+     */
+
+    public void moveRight() {
+        GridPane board = this.view.getBoard();
+        ObservableList<Node> childrens = board.getChildren();
+
+        Comparator<Node> comparator = new Comparator<Node>() {
+            @Override
+            public int compare(Node node1, Node node2) {
+                return ((int) node1.getBoundsInParent().getMinX() - (int) node2.getBoundsInParent().getMinX());
+            }
+        };
+        SortedList<Node> sorted = new SortedList<Node>(childrens, comparator.reversed());
+
+        double firstRowDist = 300;
+        double secondRowDist = 300;
+        double thirdRowDist = 300;
+        double fouthRowDist = 300;
+
+        for (Node node : sorted) {
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+
+            if (node.getBoundsInParent().getMinY() == 0) {
+                tt.setByX(-(node.getBoundsInParent().getMinX() - firstRowDist));
+                firstRowDist -= 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinY() == 100) {
+
+                tt.setByX(-(node.getBoundsInParent().getMinX() - secondRowDist));
+                secondRowDist -= 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinY() == 200) {
+                tt.setByX(-(node.getBoundsInParent().getMinX() - thirdRowDist));
+                thirdRowDist -= 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinY() == 300) {
+                tt.setByX(-(node.getBoundsInParent().getMinX() - fouthRowDist));
+                fouthRowDist -= 100;
+                tt.play();
+            }
+        }
+    }
+
+
+
 
     public void handle(KeyEvent e) {
         String type = e.getEventType().getName();
@@ -87,8 +135,7 @@ public class Animation {
             moveLeft();
 
         } else if (e.getCode() == KeyCode.RIGHT) {
-            //moveRight();
-            System.out.println("Do nothing");
+            moveRight();
         } else {
             System.out.println("Do nothing");
         }
