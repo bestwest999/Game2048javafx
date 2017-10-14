@@ -7,6 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
@@ -14,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
+import java.beans.EventHandler;
 import java.util.Comparator;
 
 
@@ -45,7 +47,7 @@ public class Animation {
 
 
         for (Node node : sorted) {
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(2), node);
 
 
             bounds.add(node.getBoundsInParent());
@@ -54,17 +56,21 @@ public class Animation {
             node.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
                 @Override
                 public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-
+                    int x = (int)(newValue.getMinX()/100)*100;
+                    int y = (int)(newValue.getMinY()/100)*100;
 
                     if (newValue.getMinX() < 0) {
                         tt.pause();
-                        System.out.println("Fuck off");
 
-                    } else if (leftCollisionCheck(bounds, node)) {
+
+
+                    } else if  (leftCollisionCheck(bounds, node)) {
+
                         tt.pause();
-                        System.out.println("Fuck node");
+
 
                     }
+
                     bounds.remove(oldValue);
                     bounds.add(newValue);
 
@@ -73,9 +79,10 @@ public class Animation {
 
             });
 
-            tt.setByX(-400);
-            tt.setCycleCount(3);
-            tt.play();
+tt.setNode(node);
+           tt.setByX(-300);
+           tt.play();
+
         }
     }
 
@@ -94,8 +101,7 @@ public class Animation {
 
 
         for (Node node : sorted) {
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
-
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(2), node);
 
             bounds.add(node.getBoundsInParent());
 
@@ -107,24 +113,30 @@ public class Animation {
 
                     if (newValue.getMaxX() > 400) {
                         tt.pause();
-                        System.out.println("Fuck off");
+                        board.requestLayout();
 
                     } else if (rightCollisionCheck(bounds, node)) {
+                        double x = (int)(newValue.getMinX()/100)*100;
                         tt.pause();
-                        System.out.println("Fuck node");
-
                     }
+
+                    double x = (int)(newValue.getMinX()/100)*100;
+                    int y = (int)(newValue.getMinY()/100)*100;
+
+
                     bounds.remove(oldValue);
                     bounds.add(newValue);
+
 
 
                 }
 
             });
 
-            tt.setByX(400);
-            tt.setCycleCount(3);
-            tt.play();
+            tt.setNode(node);
+    tt.setByX(300);
+    tt.play();
+
         }
     }
 
@@ -148,7 +160,6 @@ public class Animation {
 
                         return true;
                     } else {
-                        System.out.println("bad");
                         return false;
 
                     }
@@ -176,7 +187,6 @@ public class Animation {
 
                         return true;
                     } else {
-                        System.out.println("bad");
                         return false;
 
                     }
@@ -198,6 +208,7 @@ public class Animation {
         System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
         if (e.getCode() == KeyCode.LEFT) {
             moveLeft();
+
         }
         else if (e.getCode() == KeyCode.RIGHT) {
             moveRight();

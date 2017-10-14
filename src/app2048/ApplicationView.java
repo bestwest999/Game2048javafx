@@ -18,9 +18,6 @@ public class ApplicationView extends GridPane {
 
     public GridPane drawBoard() {
         board.setMinSize(400, 400);
-        //board.setHgap(5);
-        //board.setVgap(5);
-        //board.setGridLinesVisible(true);
 
         int rowCount = 4;
         int colCount = 4;
