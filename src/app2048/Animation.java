@@ -2,20 +2,13 @@ package app2048;
 
 
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-
-import java.beans.EventHandler;
 import java.util.Comparator;
 
 
@@ -124,7 +117,88 @@ public class Animation {
         }
     }
 
+    public void moveUp() {
+        GridPane board = this.view.getBoard();
+        ObservableList<Node> childrens = board.getChildren();
 
+        Comparator<Node> comparator = new Comparator<Node>() {
+            @Override
+            public int compare(Node node1, Node node2) {
+                return ((int) node1.getBoundsInParent().getMinY() - (int) node2.getBoundsInParent().getMinY());
+            }
+        };
+        SortedList<Node> sorted = new SortedList<Node>(childrens, comparator);
+
+        double firstColDist = 0;
+        double secondColDist = 0;
+        double thirdColDist = 0;
+        double fouthColDist = 0;
+
+        for (Node node : sorted) {
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+
+            if (node.getBoundsInParent().getMinX() == 0) {
+                tt.setByY(-(node.getBoundsInParent().getMinY()) + firstColDist);
+                firstColDist += 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinX() == 100) {
+
+                tt.setByY(-(node.getBoundsInParent().getMinY()) + secondColDist);
+                secondColDist += 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinX() == 200) {
+                tt.setByY(-(node.getBoundsInParent().getMinY()) + thirdColDist);
+                thirdColDist += 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinX() == 300) {
+                tt.setByY(-(node.getBoundsInParent().getMinY()) + fouthColDist);
+                fouthColDist += 100;
+                tt.play();
+            }
+        }
+    }
+
+
+    public void moveDown() {
+        GridPane board = this.view.getBoard();
+        ObservableList<Node> childrens = board.getChildren();
+
+        Comparator<Node> comparator = new Comparator<Node>() {
+            @Override
+            public int compare(Node node1, Node node2) {
+                return ((int) node1.getBoundsInParent().getMinY() - (int) node2.getBoundsInParent().getMinY());
+            }
+        };
+        SortedList<Node> sorted = new SortedList<Node>(childrens, comparator.reversed());
+
+        double firstColDist = 300;
+        double secondColDist = 300;
+        double thirdColDist = 300;
+        double fouthColDist = 300;
+
+        for (Node node : sorted) {
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+
+            if (node.getBoundsInParent().getMinX() == 0) {
+                tt.setByY(-(node.getBoundsInParent().getMinY() - firstColDist));
+                firstColDist -= 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinX() == 100) {
+
+                tt.setByY(-(node.getBoundsInParent().getMinY() - secondColDist));
+                secondColDist -= 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinX() == 200) {
+                tt.setByY(-(node.getBoundsInParent().getMinY() - thirdColDist));
+                thirdColDist -= 100;
+                tt.play();
+            } else if (node.getBoundsInParent().getMinX() == 300) {
+                tt.setByY(-(node.getBoundsInParent().getMinY() - fouthColDist));
+                fouthColDist -= 100;
+                tt.play();
+            }
+        }
+    }
 
 
     public void handle(KeyEvent e) {
@@ -136,9 +210,12 @@ public class Animation {
 
         } else if (e.getCode() == KeyCode.RIGHT) {
             moveRight();
-        } else {
-            System.out.println("Do nothing");
+        } else if (e.getCode() == KeyCode.UP) {
+            moveUp();
+        } else if (e.getCode() == KeyCode.DOWN) {
+            moveDown();
         }
+
     }
 
 
