@@ -26,6 +26,5 @@ public class App2048 extends Application {
         stage.setTitle("Adding Children to a GridPane");
         stage.show();
 
-
     }
 }

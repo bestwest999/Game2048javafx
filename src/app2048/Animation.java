@@ -9,6 +9,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.beans.EventHandler;
 import java.util.Comparator;
 
 
@@ -78,8 +82,8 @@ public class Animation {
 
     public void moveRight() {
         GridPane board = this.view.getBoard();
+        NodeOper addNode = new NodeOper(board);
         ObservableList<Node> childrens = board.getChildren();
-
         Comparator<Node> comparator = new Comparator<Node>() {
             @Override
             public int compare(Node node1, Node node2) {
@@ -100,22 +104,35 @@ public class Animation {
                 tt.setByX(-(node.getBoundsInParent().getMinX() - firstRowDist));
                 firstRowDist -= 100;
                 tt.play();
+
             } else if (node.getBoundsInParent().getMinY() == 100) {
 
                 tt.setByX(-(node.getBoundsInParent().getMinX() - secondRowDist));
                 secondRowDist -= 100;
                 tt.play();
+                tt.setOnFinished(e-> tt.stop());
+
             } else if (node.getBoundsInParent().getMinY() == 200) {
                 tt.setByX(-(node.getBoundsInParent().getMinX() - thirdRowDist));
                 thirdRowDist -= 100;
                 tt.play();
+                tt.setOnFinished(e-> tt.stop());
             } else if (node.getBoundsInParent().getMinY() == 300) {
                 tt.setByX(-(node.getBoundsInParent().getMinX() - fouthRowDist));
                 fouthRowDist -= 100;
                 tt.play();
+
             }
+
+            //System.out.println(node.get);
+            if(sorted.get(sorted.size()-1) == node) {
+                tt.setOnFinished(e-> tt.stop());
+                sorted.addListener(addNode.addRndNode());
+            }
+            }
+
         }
-    }
+
 
     public void moveUp() {
         GridPane board = this.view.getBoard();
@@ -202,12 +219,12 @@ public class Animation {
 
 
     public void handle(KeyEvent e) {
+        NodeOper addNode = new NodeOper(this.board);
         String type = e.getEventType().getName();
         KeyCode keyCode = e.getCode();
         System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
         if (e.getCode() == KeyCode.LEFT) {
             moveLeft();
-
         } else if (e.getCode() == KeyCode.RIGHT) {
             moveRight();
         } else if (e.getCode() == KeyCode.UP) {
@@ -215,6 +232,7 @@ public class Animation {
         } else if (e.getCode() == KeyCode.DOWN) {
             moveDown();
         }
+
 
     }
 
