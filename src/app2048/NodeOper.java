@@ -39,10 +39,10 @@ public class NodeOper {
     }
 
 
-    public GridPane addNode(GridPane Mainboard) {
+    public GridPane addNode() {
 
         SimpleIntegerProperty number = new SimpleIntegerProperty(2);
-        GridPane board = Mainboard;
+
         Tile tile = new Tile();
         board.add(tile.getTile(), 3, 3);
         return board;

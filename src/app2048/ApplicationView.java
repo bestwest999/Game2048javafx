@@ -35,9 +35,8 @@ public class ApplicationView extends GridPane {
         requestFocus();
 
         NodeOper addNode = new NodeOper(board);
-        addNode.addRndNode();
-        for (int i = 0; i < 7; i++)
-            board = addNode.addRndNode();
+        addNode.addNode();
+
         return board;
 
     }

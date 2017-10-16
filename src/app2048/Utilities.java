@@ -39,7 +39,7 @@ public class Utilities {
                 System.out.println("row= "+ mainBoard.getRowIndex(node)+ "col= " + mainBoard.getColumnIndex(node) );
                 result = false;
                 return result;
-               // break;
+                // break;
 
             }
         }
