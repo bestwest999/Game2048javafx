@@ -1,23 +1,32 @@
 package app2048;
 
+import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.util.Duration;
 
 import javax.swing.text.StyledEditorKit;
+
+import java.util.Comparator;
 
 import static app2048.Utilities.shuffleArray;
 
 
-public class ApplicationView extends GridPane {
-    private GridPane board = new GridPane();
+ public class ApplicationView extends GridPane {
+  private GridPane board = new GridPane();
 
-    public GridPane getBoard() {
+     public GridPane getBoard() {
         return board;
     }
 
-    public GridPane drawBoard() {
-        board.setMinSize(400, 400);
+  public GridPane drawBoard() {
+       board.setMinSize(400, 400);
 
         int rowCount = 4;
         int colCount = 4;
@@ -34,13 +43,11 @@ public class ApplicationView extends GridPane {
         board.setFocusTraversable(true);
         requestFocus();
 
-        NodeOper addNode = new NodeOper(board);
-        addNode.addNode();
-
+        NodeOper addNode = new NodeOper();
+        addNode.addNode(board);
         return board;
 
     }
-
 
 
 }

@@ -14,7 +14,7 @@ public class Utilities {
 
     public static int[] shuffleArray() {
         Random rnd = ThreadLocalRandom.current();
-        int[] ar = {0, 1, 2, 3};
+        int[] ar = {0, 100, 200, 300};
         for (int i = 3; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
             // Simple swap
@@ -34,17 +34,17 @@ public class Utilities {
 //    return result;
 //}
 
-        for (Node node : childrens) {
-            if (mainBoard.getRowIndex(node) == row && mainBoard.getColumnIndex(node) == column) {
-                System.out.println("row= "+ mainBoard.getRowIndex(node)+ "col= " + mainBoard.getColumnIndex(node) );
+        for (Node node : childrens)
+            if (node.getBoundsInParent().getMinY() == row && node.getBoundsInParent().getMinX() == column) {
+                System.out.println("row= "+ node.getTranslateX()+ "col= " + node.getTranslateY() );
                 result = false;
                 return result;
                 // break;
 
             }
-        }
 
 
+        System.out.println("row= "+ row + "col= " + column );
         return result;
     }
 

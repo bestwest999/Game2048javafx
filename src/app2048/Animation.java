@@ -1,10 +1,14 @@
 package app2048;
 
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.geometry.BoundingBox;
@@ -19,8 +23,11 @@ import javafx.util.Duration;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.beans.EventHandler;
 import java.util.Comparator;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 public class Animation {
@@ -28,6 +35,26 @@ public class Animation {
     private GridPane board;
     private ApplicationView view;
 
+    Runnable task = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1100);
+            } catch (InterruptedException f){}
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    NodeOper addNode = new NodeOper();
+                    addNode.addRndNode(board);
+
+
+                }
+            });
+
+
+        }
+    };
 
     public Animation(ApplicationView applicationView) {
         view = applicationView;
@@ -41,8 +68,8 @@ public class Animation {
      @param firstRowDist, secondRowDist, thirdRowDist, fouthRoWDist - distance filled by tilse that are allready moved left
      */
 
-    public void moveLeft() {
-        GridPane board = this.view.getBoard();
+     public void moveLeft() {
+     GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
 
         Comparator<Node> comparator = new Comparator<Node>() {
@@ -80,7 +107,8 @@ public class Animation {
                 tt.play();
             }
         }
-    }
+
+        new Thread(task).start();}
 
        /*
      moveRight() move all present tiles to left
@@ -88,7 +116,7 @@ public class Animation {
      */
 
     public void moveRight() {
-        GridPane board = this.view.getBoard();
+          GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
         Comparator<Node> comparator = new Comparator<Node>() {
             @Override
@@ -97,61 +125,34 @@ public class Animation {
             }
         };
         SortedList<Node> sorted = new SortedList<Node>(childrens, comparator.reversed());
-        double firstRowDist = 300;
-        double secondRowDist = 300;
-        double thirdRowDist = 300;
-        double fouthRowDist = 300;
+                double firstRowDist = 300;
+                double secondRowDist = 300;
+                double thirdRowDist = 300;
+                double fouthRowDist = 300;
 
-        for (Node node : sorted) {
-            ObservableList<Bounds> bounds = FXCollections.observableArrayList();
-            bounds.add(node.getBoundsInParent());
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
-            if (node.getBoundsInParent().getMinY() == 0) {
-                tt.setByX(-(node.getBoundsInParent().getMinX() - firstRowDist));
-                firstRowDist -= 100;
-                tt.play();
+                for (Node node : sorted) {
+                    ObservableList<Bounds> bounds = FXCollections.observableArrayList();
+                    bounds.add(node.getBoundsInParent());
+                    TranslateTransition tt = new TranslateTransition(Duration.seconds(1), node);
+                    if (node.getBoundsInParent().getMinY() == 0) {
+                        tt.setByX(-(node.getBoundsInParent().getMinX() - firstRowDist));
+                        firstRowDist -= 100;
 
-            } else if (node.getBoundsInParent().getMinY() == 100) {
+                    } else if (node.getBoundsInParent().getMinY() == 100) {
+                        tt.setByX(-(node.getBoundsInParent().getMinX() - secondRowDist));
+                        secondRowDist -= 100;
+                    } else if (node.getBoundsInParent().getMinY() == 200) {
+                        tt.setByX(-(node.getBoundsInParent().getMinX() - thirdRowDist));
+                        thirdRowDist -= 100;
+                    } else if (node.getBoundsInParent().getMinY() == 300) {
+                        tt.setByX(-(node.getBoundsInParent().getMinX() - fouthRowDist));
+                        fouthRowDist -= 100;
 
-                tt.setByX(-(node.getBoundsInParent().getMinX() - secondRowDist));
-                secondRowDist -= 100;
-                tt.play();
-                tt.setOnFinished(e -> tt.stop());
+                    }
+                    tt.play();
+                }
 
-            } else if (node.getBoundsInParent().getMinY() == 200) {
-                tt.setByX(-(node.getBoundsInParent().getMinX() - thirdRowDist));
-                thirdRowDist -= 100;
-                tt.play();
-                tt.setOnFinished(e -> tt.stop());
-            } else if (node.getBoundsInParent().getMinY() == 300) {
-                tt.setByX(-(node.getBoundsInParent().getMinX() - fouthRowDist));
-                fouthRowDist -= 100;
-                tt.play();
-
-            }
-
-            //System.out.println(node.get);
-            if (sorted.get(sorted.size() - 1) == node) {
-           System.out.println(node.getBoundsInParent());
-            }
-
-
-               //     node.boundsInParentProperty().addListener(new ChangeListener<Bounds>() {
-                //        @Override
-                 //       public void changed(ObservableValue<? extends Bounds> observable, Bounds oldValue, Bounds newValue) {
-                  //          NodeOper addNode = new NodeOper(board);
-                   //         addNode.addRndNode(bounds);
-                    //    }
-                   // });
-
-
-
-
-                //sorted.addListener(addNode.addRndNode());
-            }
-        }
-
-
+     new Thread(task).start(); }
 
 
     public void moveUp() {
@@ -193,7 +194,7 @@ public class Animation {
                 tt.play();
             }
         }
-    }
+        new Thread(task).start();}
 
 
     public void moveDown() {
@@ -235,11 +236,11 @@ public class Animation {
                 tt.play();
             }
         }
-    }
+        new Thread(task).start(); }
 
 
     public void handle(KeyEvent e) {
-        NodeOper addNode = new NodeOper(this.board);
+
         String type = e.getEventType().getName();
         KeyCode keyCode = e.getCode();
         System.out.println(type + ": Key Code=" + keyCode.getName() + ", Text=" + e.getText());
@@ -247,7 +248,7 @@ public class Animation {
             moveLeft();
         } else if (e.getCode() == KeyCode.RIGHT) {
             moveRight();
-            addNode.addRndNode();
+
         } else if (e.getCode() == KeyCode.UP) {
             moveUp();
         } else if (e.getCode() == KeyCode.DOWN) {
@@ -259,6 +260,3 @@ public class Animation {
 
 
 }
-
-
-

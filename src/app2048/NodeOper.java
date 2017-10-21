@@ -2,20 +2,16 @@ package app2048;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.GridPane;
-
 import static app2048.Utilities.checkNodeSpaceIsEmpty;
 import static app2048.Utilities.shuffleArray;
 
 
 public class NodeOper {
 
-    GridPane board;
 
-    public NodeOper(GridPane board) {
-        this.board = board;
-    }
 
-    public GridPane addRndNode() {
+    public GridPane addRndNode(GridPane board) {
+
 
         SimpleIntegerProperty number = new SimpleIntegerProperty(2);
         Tile tile = new Tile();
@@ -26,12 +22,12 @@ public class NodeOper {
             for (int y = 0; y < yCoordRow.length; y++) {
 
                 if (checkNodeSpaceIsEmpty(xCoordCol[x], yCoordRow[y], board)) {
-                    board.add(tile.getTile(), xCoordCol[x], yCoordRow[y]);
+                    board.add(tile.getTile(), (xCoordCol[x]/100), (yCoordRow[y]/100));
+
 
                     return board;
 
                 }
-
             }
 
         }
@@ -39,7 +35,7 @@ public class NodeOper {
     }
 
 
-    public GridPane addNode() {
+    public GridPane addNode(GridPane board) {
 
         SimpleIntegerProperty number = new SimpleIntegerProperty(2);
 
