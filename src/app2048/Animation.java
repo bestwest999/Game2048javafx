@@ -20,7 +20,7 @@ public class Animation {
 
     private GridPane board;
     private ApplicationView view;
-    Boolean column = false;
+
 
 
     Runnable removeNodeLeft = new Runnable() {
@@ -30,8 +30,59 @@ public class Animation {
                 @Override
                 public void run() {
                     NodeOper nodeoper = new NodeOper();
-                    nodeoper.removeNode(board);
+                    nodeoper.removeNodeLeftRight(board, "left");
                     moveLeft();
+                }
+            });
+
+
+        }
+    };
+
+
+    Runnable removeNodeRight = new Runnable() {
+        @Override
+        public void run() {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    NodeOper nodeoper = new NodeOper();
+                    nodeoper.removeNodeLeftRight(board, "right");
+                    moveRight();
+                }
+            });
+
+
+        }
+    };
+
+
+    Runnable removeNodeUp = new Runnable() {
+        @Override
+        public void run() {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    NodeOper nodeoper = new NodeOper();
+                    nodeoper.removeNodeUpDown(board, "up");
+                    moveUp();
+                }
+            });
+
+
+        }
+    };
+
+
+    Runnable removeNodeDown = new Runnable() {
+        @Override
+        public void run() {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    NodeOper nodeoper = new NodeOper();
+                    nodeoper.removeNodeUpDown(board, "down");
+                    moveDown();
                 }
             });
 
@@ -75,7 +126,7 @@ public class Animation {
 
     public void moveLeft() {
         GridPane board = this.view.getBoard();
-      //  ObservableList<Node> childrens = board.getChildren();
+
 
         Comparator<Node> comparator = new Comparator<Node>() {
             @Override
@@ -262,12 +313,15 @@ public class Animation {
             new Thread(addRndNode).start();
         } else if (e.getCode() == KeyCode.RIGHT) {
             moveRight();
+            new Thread(removeNodeRight).start();
             new Thread(addRndNode).start();
         } else if (e.getCode() == KeyCode.UP) {
             moveUp();
+            new Thread(removeNodeUp).start();
             new Thread(addRndNode).start();
         } else if (e.getCode() == KeyCode.DOWN) {
             moveDown();
+            new Thread(removeNodeDown).start();
             new Thread(addRndNode).start();
         }
 

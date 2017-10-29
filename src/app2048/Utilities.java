@@ -2,10 +2,14 @@ package app2048;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
+import javax.swing.text.html.ListView;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -45,6 +49,12 @@ public class Utilities {
     }
 
 
+public static List<Node> removeList (int x, Node node){
+Node lastNode = null;
+List<Node> removeList = new ArrayList<Node>();
 
+
+return removeList;
+}
 
 }
