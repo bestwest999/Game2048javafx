@@ -44,7 +44,7 @@ import static app2048.Utilities.shuffleArray;
         requestFocus();
 
         NodeOper addNode = new NodeOper();
-        addNode.addNode(board);
+        addNode.addRndNode(board);
         return board;
 
     }

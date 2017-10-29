@@ -30,21 +30,17 @@ public class Utilities {
         Boolean result = true;
 
         ObservableList<Node> childrens = mainBoard.getChildren();
-//if(!(childrens == null)) {
-//    return result;
-//}
+
 
         for (Node node : childrens)
             if (node.getBoundsInParent().getMinY() == row && node.getBoundsInParent().getMinX() == column) {
-                System.out.println("row= "+ node.getTranslateX()+ "col= " + node.getTranslateY() );
+             //   System.out.println("row= "+ node.getTranslateX()+ "col= " + node.getTranslateY() );
                 result = false;
                 return result;
-                // break;
-
             }
 
 
-        System.out.println("row= "+ row + "col= " + column );
+        //System.out.println("row= "+ row + "col= " + column );
         return result;
     }
 
