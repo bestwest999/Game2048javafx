@@ -26,6 +26,9 @@ public class Animation {
     Runnable removeNodeLeft = new Runnable() {
         @Override
         public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException f) { }
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -43,6 +46,9 @@ public class Animation {
     Runnable removeNodeRight = new Runnable() {
         @Override
         public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException f) { }
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -60,6 +66,9 @@ public class Animation {
     Runnable removeNodeUp = new Runnable() {
         @Override
         public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException f) { }
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -77,9 +86,14 @@ public class Animation {
     Runnable removeNodeDown = new Runnable() {
         @Override
         public void run() {
+
+
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException f) { }
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeUpDown(board, "down");
                     moveDown();
@@ -95,9 +109,8 @@ public class Animation {
         @Override
         public void run() {
             try {
-                Thread.sleep(120);
-            } catch (InterruptedException f) {
-            }
+                Thread.sleep(2000);
+            } catch (InterruptedException f) { }
 
             Platform.runLater(new Runnable() {
                 @Override
@@ -142,7 +155,7 @@ public class Animation {
         double fouthRowDist = 0;
 
         for (Node node : sorted) {
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.1), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.9), node);
 
             if (node.getBoundsInParent().getMinY() == 0) {
                 tt.setByX(-(node.getBoundsInParent().getMinX()) + firstRowDist);
@@ -194,7 +207,7 @@ public class Animation {
         for (Node node : sorted) {
             ObservableList<Bounds> bounds = FXCollections.observableArrayList();
             bounds.add(node.getBoundsInParent());
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.1), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.9), node);
             if (node.getBoundsInParent().getMinY() == 0) {
                 tt.setByX(-(node.getBoundsInParent().getMinX() - firstRowDist));
                 firstRowDist -= 100;
@@ -217,7 +230,7 @@ public class Animation {
     }
 
 
-    public void moveUp() {
+     public void moveUp() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
 
@@ -235,7 +248,7 @@ public class Animation {
         double fouthColDist = 0;
 
         for (Node node : sorted) {
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.1), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.9), node);
 
             if (node.getBoundsInParent().getMinX() == 0) {
                 tt.setByY(-(node.getBoundsInParent().getMinY()) + firstColDist);
@@ -278,7 +291,7 @@ public class Animation {
         double fouthColDist = 300;
 
         for (Node node : sorted) {
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.1), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.9), node);
 
             if (node.getBoundsInParent().getMinX() == 0) {
                 tt.setByY(-(node.getBoundsInParent().getMinY() - firstColDist));

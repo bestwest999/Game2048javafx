@@ -19,7 +19,7 @@ import static app2048.Utilities.shuffleArray;
 public class NodeOper {
 
 
-    public GridPane addRndNode(GridPane board) {
+  synchronized   public GridPane addRndNode(GridPane board) {
 
         SimpleIntegerProperty number = new SimpleIntegerProperty(2);
         Tile tile = new Tile();
@@ -41,7 +41,7 @@ public class NodeOper {
         return board;
     }
 
-    public GridPane removeNodeLeftRight(GridPane board , String direction ) {
+   synchronized public GridPane removeNodeLeftRight(GridPane board , String direction ) {
         Node lastNode0 = null;
         Node lastNode100 = null;
         Node lastNode200 = null;
@@ -64,12 +64,14 @@ else
 
 
         for (Node node : sorted) {
+            System.out.println(((Label) node).getText());
 
             if ((int) node.getBoundsInParent().getMinY() == 0)
                 if (lastNode0 == null) {
                     lastNode0 = node;
-                } else if (((Label) node).getText() == ((Label) lastNode0).getText()) {
-                    ((Label) lastNode0).setText("4");
+                } else if (((Label) node).getText().equals( ((Label) lastNode0).getText())  ){
+                    int textNumber = Integer.parseInt(((Label) lastNode0).getText()) *2;
+                    ((Label) lastNode0).setText(String.valueOf(textNumber));
                     removeList.add(node);
                     lastNode0 = null;
                 } else {
@@ -79,8 +81,9 @@ else
             if ((int) node.getBoundsInParent().getMinY() == 100)
                 if (lastNode100 == null) {
                     lastNode100 = node;
-                } else if (((Label) node).getText() == ((Label) lastNode100).getText()) {
-                    ((Label) lastNode100).setText("4");
+                } else if (((Label) node).getText().equals( ((Label) lastNode100).getText())  ){
+                    int textNumber = Integer.parseInt(((Label) lastNode100).getText()) *2;
+                    ((Label) lastNode100).setText(String.valueOf(textNumber));
                     removeList.add(node);
                     lastNode100 = null;
                 } else {
@@ -90,8 +93,9 @@ else
             if ((int) node.getBoundsInParent().getMinY() == 200)
                 if (lastNode200 == null) {
                     lastNode200 = node;
-                } else if (((Label) node).getText() == ((Label) lastNode200).getText()) {
-                    ((Label) lastNode200).setText("4");
+                } else if (((Label) node).getText().equals( ((Label) lastNode200).getText())  ){
+                    int textNumber = Integer.parseInt(((Label) lastNode200).getText()) *2;
+                    ((Label) lastNode200).setText(String.valueOf(textNumber));
                     removeList.add(node);
                     lastNode200 = null;
                 } else {
@@ -102,8 +106,9 @@ else
             if ((int) node.getBoundsInParent().getMinY() == 300)
                 if (lastNode300 == null) {
                     lastNode300 = node;
-                } else if (((Label) node).getText() == ((Label) lastNode300).getText()) {
-                    ((Label) lastNode300).setText("4");
+                } else if (((Label) node).getText().equals( ((Label) lastNode300).getText())  ){
+                    int textNumber = Integer.parseInt(((Label) lastNode300).getText()) *2;
+                    ((Label) lastNode300).setText(String.valueOf(textNumber));
                     removeList.add(node);
                     lastNode300 = null;
                 } else {
@@ -116,7 +121,7 @@ else
 return board;
 }
 
-    public GridPane removeNodeUpDown(GridPane board , String direction ) {
+ synchronized    public GridPane removeNodeUpDown(GridPane board , String direction ) {
         Node lastNode0 = null;
         Node lastNode100 = null;
         Node lastNode200 = null;
@@ -143,8 +148,9 @@ return board;
             if ((int) node.getBoundsInParent().getMinX() == 0)
                 if (lastNode0 == null) {
                     lastNode0 = node;
-                } else if (((Label) node).getText() == ((Label) lastNode0).getText()) {
-                    ((Label) lastNode0).setText("4");
+                } else if (((Label) node).getText().equals( ((Label) lastNode0).getText())  ){
+                    int textNumber = Integer.parseInt(((Label) lastNode0).getText()) *2;
+                ((Label) lastNode0).setText(String.valueOf(textNumber));
                     removeList.add(node);
                     lastNode0 = null;
                 } else {
@@ -154,8 +160,9 @@ return board;
             if ((int) node.getBoundsInParent().getMinX() == 100)
                 if (lastNode100 == null) {
                     lastNode100 = node;
-                } else if (((Label) node).getText() == ((Label) lastNode100).getText()) {
-                    ((Label) lastNode100).setText("4");
+                } else if (((Label) node).getText().equals( ((Label) lastNode100).getText())  ){
+                    int textNumber = Integer.parseInt(((Label) lastNode100).getText()) *2;
+                ((Label) lastNode100).setText(String.valueOf(textNumber));
                     removeList.add(node);
                     lastNode100 = null;
                 } else {
@@ -165,8 +172,9 @@ return board;
             if ((int) node.getBoundsInParent().getMinX() == 200)
                 if (lastNode200 == null) {
                     lastNode200 = node;
-                } else if (((Label) node).getText() == ((Label) lastNode200).getText()) {
-                    ((Label) lastNode200).setText("4");
+                } else if (((Label) node).getText().equals( ((Label) lastNode200).getText())  ){
+                    int textNumber = Integer.parseInt(((Label) lastNode200).getText()) *2;
+                    ((Label) lastNode200).setText(String.valueOf(textNumber));
                     removeList.add(node);
                     lastNode200 = null;
                 } else {
@@ -177,8 +185,9 @@ return board;
             if ((int) node.getBoundsInParent().getMinX() == 300)
                 if (lastNode300 == null) {
                     lastNode300 = node;
-                } else if (((Label) node).getText() == ((Label) lastNode300).getText()) {
-                    ((Label) lastNode300).setText("4");
+                } else if (((Label) node).getText().equals( ((Label) lastNode300).getText())  ){
+                    int textNumber = Integer.parseInt(((Label) lastNode300).getText()) *2;
+                    ((Label) lastNode300).setText(String.valueOf(textNumber));
                     removeList.add(node);
                     lastNode300 = null;
                 } else {
