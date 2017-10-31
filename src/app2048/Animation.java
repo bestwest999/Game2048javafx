@@ -27,7 +27,7 @@ public class Animation {
         @Override
         public void run() {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(220);
             } catch (InterruptedException f) { }
             Platform.runLater(new Runnable() {
                 @Override
@@ -47,7 +47,7 @@ public class Animation {
         @Override
         public void run() {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(220);
             } catch (InterruptedException f) { }
             Platform.runLater(new Runnable() {
                 @Override
@@ -67,7 +67,7 @@ public class Animation {
         @Override
         public void run() {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(220);
             } catch (InterruptedException f) { }
             Platform.runLater(new Runnable() {
                 @Override
@@ -92,7 +92,7 @@ public class Animation {
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(220);
                     } catch (InterruptedException f) { }
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeUpDown(board, "down");
@@ -109,7 +109,7 @@ public class Animation {
         @Override
         public void run() {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(600);
             } catch (InterruptedException f) { }
 
             Platform.runLater(new Runnable() {
@@ -117,7 +117,6 @@ public class Animation {
                 public void run() {
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.addRndNode(board);
-
                 }
             });
 
@@ -155,7 +154,7 @@ public class Animation {
         double fouthRowDist = 0;
 
         for (Node node : sorted) {
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.9), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.2), node);
 
             if (node.getBoundsInParent().getMinY() == 0) {
                 tt.setByX(-(node.getBoundsInParent().getMinX()) + firstRowDist);
@@ -207,7 +206,7 @@ public class Animation {
         for (Node node : sorted) {
             ObservableList<Bounds> bounds = FXCollections.observableArrayList();
             bounds.add(node.getBoundsInParent());
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.9), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.2), node);
             if (node.getBoundsInParent().getMinY() == 0) {
                 tt.setByX(-(node.getBoundsInParent().getMinX() - firstRowDist));
                 firstRowDist -= 100;
@@ -230,7 +229,7 @@ public class Animation {
     }
 
 
-     public void moveUp() {
+      public void moveUp() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
 
@@ -248,7 +247,7 @@ public class Animation {
         double fouthColDist = 0;
 
         for (Node node : sorted) {
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.9), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.2), node);
 
             if (node.getBoundsInParent().getMinX() == 0) {
                 tt.setByY(-(node.getBoundsInParent().getMinY()) + firstColDist);
@@ -291,7 +290,7 @@ public class Animation {
         double fouthColDist = 300;
 
         for (Node node : sorted) {
-            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.9), node);
+            TranslateTransition tt = new TranslateTransition(Duration.seconds(0.2), node);
 
             if (node.getBoundsInParent().getMinX() == 0) {
                 tt.setByY(-(node.getBoundsInParent().getMinY() - firstColDist));
@@ -323,7 +322,7 @@ public class Animation {
         if (e.getCode() == KeyCode.LEFT) {
             moveLeft();
             new Thread(removeNodeLeft).start();
-            new Thread(addRndNode).start();
+           new Thread(addRndNode).start();
         } else if (e.getCode() == KeyCode.RIGHT) {
             moveRight();
             new Thread(removeNodeRight).start();
