@@ -34,6 +34,9 @@ class Animation {
                 public void run() {
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeLeftRight(board, "left");
+                    try {
+                        new Thread(addRndNode).join();
+                    } catch (InterruptedException e) {};
                     moveLeft();
                 }
             });
@@ -54,6 +57,9 @@ class Animation {
                 public void run() {
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeLeftRight(board, "right");
+                    try {
+                        new Thread(addRndNode).join();
+                    } catch (InterruptedException e) {};
                     moveRight();
                 }
             });
@@ -74,6 +80,9 @@ class Animation {
                 public void run() {
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeUpDown(board, "up");
+                    try {
+                        new Thread(addRndNode).join();
+                    } catch (InterruptedException e) {};
                     moveUp();
                 }
             });
@@ -96,6 +105,9 @@ class Animation {
                     } catch (InterruptedException f) { }
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeUpDown(board, "down");
+                    try {
+                        new Thread(addRndNode).join();
+                    } catch (InterruptedException e) {};
                     moveDown();
                 }
             });

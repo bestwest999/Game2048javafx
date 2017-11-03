@@ -21,11 +21,11 @@ import static app2048.Utilities.shuffleArray;
  public class ApplicationView extends GridPane {
   private GridPane board = new GridPane();
 
-     public GridPane getBoard() {
+   synchronized   public GridPane getBoard() {
         return board;
     }
 
-  public GridPane drawBoard() {
+ synchronized public GridPane drawBoard() {
        board.setMinSize(400, 400);
 
         int rowCount = 4;
