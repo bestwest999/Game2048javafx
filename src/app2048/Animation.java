@@ -1,6 +1,8 @@
 package app2048;
 
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -34,10 +36,13 @@ class Animation {
                 public void run() {
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeLeftRight(board, "left");
-                    try {
-                        new Thread(addRndNode).join();
-                    } catch (InterruptedException e) {};
+                    System.out.println("Nodes removed");
                     moveLeft();
+                   try {
+                       new Thread(addRndNode).join();
+                        System.out.println("node is added");
+                } catch (InterruptedException e) {};
+
                 }
             });
 
@@ -57,10 +62,13 @@ class Animation {
                 public void run() {
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeLeftRight(board, "right");
+                    System.out.println("Nodes removed");
+                    moveRight();
                     try {
                         new Thread(addRndNode).join();
+                        System.out.println("node is added");
                     } catch (InterruptedException e) {};
-                    moveRight();
+
                 }
             });
 
@@ -80,10 +88,14 @@ class Animation {
                 public void run() {
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeUpDown(board, "up");
-                    try {
-                        new Thread(addRndNode).join();
-                    } catch (InterruptedException e) {};
+                    System.out.println("Nodes removed");
                     moveUp();
+
+                   try {
+                        new Thread(addRndNode).join();
+                        System.out.println("node is added");
+                    } catch (InterruptedException e) {};
+
                 }
             });
 
@@ -105,10 +117,13 @@ class Animation {
                     } catch (InterruptedException f) { }
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeUpDown(board, "down");
-                    try {
-                        new Thread(addRndNode).join();
-                    } catch (InterruptedException e) {};
+                    System.out.println("Nodes removed");
                     moveDown();
+                    try {
+                       new Thread(addRndNode).join();
+                       System.out.println("node is added");
+                    } catch (InterruptedException e) {};
+
                 }
             });
 
@@ -132,8 +147,9 @@ class Animation {
                 }
             });
 
-
+            System.out.println("adding");
         }
+
     };
 
      Animation(ApplicationView applicationView) {
@@ -192,7 +208,7 @@ class Animation {
             }
         }
 
-
+        System.out.println("Moved left");
     }
 
        /*
@@ -237,7 +253,7 @@ class Animation {
             tt.play();
         }
 
-
+        System.out.println("move right");
     }
 
 
@@ -280,7 +296,7 @@ class Animation {
                 tt.play();
             }
         }
-
+          System.out.println("move up");
     }
 
 
@@ -323,7 +339,7 @@ class Animation {
                 tt.play();
             }
         }
-
+        System.out.println("move down");
     }
 
 
@@ -333,20 +349,21 @@ class Animation {
         KeyCode keyCode = e.getCode();
         if (e.getCode() == KeyCode.LEFT) {
             moveLeft();
+            new Thread(addRndNode).start();
             new Thread(removeNodeLeft).start();
-           new Thread(addRndNode).start();
         } else if (e.getCode() == KeyCode.RIGHT) {
             moveRight();
-            new Thread(removeNodeRight).start();
             new Thread(addRndNode).start();
+            new Thread(removeNodeRight).start();
         } else if (e.getCode() == KeyCode.UP) {
             moveUp();
-            new Thread(removeNodeUp).start();
             new Thread(addRndNode).start();
+            new Thread(removeNodeUp).start();
         } else if (e.getCode() == KeyCode.DOWN) {
             moveDown();
-            new Thread(removeNodeDown).start();
             new Thread(addRndNode).start();
+            new Thread(removeNodeDown).start();
+
         }
 
 

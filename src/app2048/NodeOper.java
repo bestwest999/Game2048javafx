@@ -64,7 +64,7 @@ else
 
 
         for (Node node : sorted) {
-            System.out.println(((Label) node).getText());
+         //   System.out.println(((Label) node).getText());
 
             if ((int) node.getBoundsInParent().getMinY() == 0)
                 if (lastNode0 == null) {
