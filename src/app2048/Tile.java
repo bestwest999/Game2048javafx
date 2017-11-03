@@ -1,7 +1,7 @@
 package app2048;
 
 
-import javafx.beans.property.SimpleIntegerProperty;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 
 
 class Tile {
-    // SimpleIntegerProperty number = new SimpleIntegerProperty(2);
     private Label tile;
     private static Integer id = 1;
 
