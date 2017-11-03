@@ -1,8 +1,7 @@
 package app2048;
 
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -24,13 +23,13 @@ class Animation {
     private ApplicationView view;
 
 
-
     private Runnable removeNodeLeft = new Runnable() {
         @Override
         public void run() {
             try {
                 Thread.sleep(220);
-            } catch (InterruptedException f) { }
+            } catch (InterruptedException f) {
+            }
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -38,11 +37,11 @@ class Animation {
                     nodeoper.removeNodeLeftRight(board, "left");
                     System.out.println("Nodes removed");
                     moveLeft();
-                   try {
-                       new Thread(addRndNode).join();
+                    try {
+                        new Thread(addRndNode).join();
                         System.out.println("node is added");
-                } catch (InterruptedException e) {};
-
+                    } catch (InterruptedException e) {
+                    }
                 }
             });
 
@@ -51,12 +50,14 @@ class Animation {
     };
 
 
+
     private Runnable removeNodeRight = new Runnable() {
         @Override
         public void run() {
             try {
                 Thread.sleep(220);
-            } catch (InterruptedException f) { }
+            } catch (InterruptedException f) {
+            }
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -67,7 +68,9 @@ class Animation {
                     try {
                         new Thread(addRndNode).join();
                         System.out.println("node is added");
-                    } catch (InterruptedException e) {};
+                    } catch (InterruptedException e) {
+                    }
+
 
                 }
             });
@@ -82,7 +85,8 @@ class Animation {
         public void run() {
             try {
                 Thread.sleep(220);
-            } catch (InterruptedException f) { }
+            } catch (InterruptedException f) {
+            }
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -91,10 +95,12 @@ class Animation {
                     System.out.println("Nodes removed");
                     moveUp();
 
-                   try {
+                    try {
                         new Thread(addRndNode).join();
                         System.out.println("node is added");
-                    } catch (InterruptedException e) {};
+                    } catch (InterruptedException e) {
+                    }
+
 
                 }
             });
@@ -114,15 +120,18 @@ class Animation {
                 public void run() {
                     try {
                         Thread.sleep(220);
-                    } catch (InterruptedException f) { }
+                    } catch (InterruptedException f) {
+                    }
                     NodeOper nodeoper = new NodeOper();
                     nodeoper.removeNodeUpDown(board, "down");
                     System.out.println("Nodes removed");
                     moveDown();
                     try {
-                       new Thread(addRndNode).join();
-                       System.out.println("node is added");
-                    } catch (InterruptedException e) {};
+                        new Thread(addRndNode).join();
+                        System.out.println("node is added");
+                    } catch (InterruptedException e) {
+                    }
+
 
                 }
             });
@@ -132,12 +141,13 @@ class Animation {
     };
 
 
-    private  Runnable addRndNode = new Runnable() {
+    private Runnable addRndNode = new Runnable() {
         @Override
         public void run() {
             try {
                 Thread.sleep(700);
-            } catch (InterruptedException f) { }
+            } catch (InterruptedException f) {
+            }
 
             Platform.runLater(new Runnable() {
                 @Override
@@ -152,7 +162,7 @@ class Animation {
 
     };
 
-     Animation(ApplicationView applicationView) {
+    Animation(ApplicationView applicationView) {
         view = applicationView;
         board = view.getBoard();
 
@@ -164,7 +174,7 @@ class Animation {
      @param firstRowDist, secondRowDist, thirdRowDist, fouthRoWDist - distance filled by tilse that are allready moved left
      */
 
-    private  void moveLeft() {
+    private void moveLeft() {
         GridPane board = this.view.getBoard();
 
 
@@ -257,7 +267,7 @@ class Animation {
     }
 
 
-      private void moveUp() {
+    private void moveUp() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
 
@@ -296,7 +306,7 @@ class Animation {
                 tt.play();
             }
         }
-          System.out.println("move up");
+        System.out.println("move up");
     }
 
 
@@ -343,7 +353,7 @@ class Animation {
     }
 
 
-     void handle(KeyEvent e) {
+    void handle(KeyEvent e) {
 
         String type = e.getEventType().getName();
         KeyCode keyCode = e.getCode();

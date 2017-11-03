@@ -1,31 +1,19 @@
 package app2048;
 
-import javafx.animation.TranslateTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.util.Duration;
-
-import javax.swing.text.StyledEditorKit;
-
-import java.util.Comparator;
-
-import static app2048.Utilities.shuffleArray;
 
 
- public class ApplicationView extends GridPane {
+
+ class ApplicationView extends GridPane {
   private GridPane board = new GridPane();
 
-   synchronized   public GridPane getBoard() {
+   synchronized   GridPane getBoard() {
         return board;
     }
 
- synchronized public GridPane drawBoard() {
+ synchronized GridPane drawBoard() {
        board.setMinSize(400, 400);
 
         int rowCount = 4;

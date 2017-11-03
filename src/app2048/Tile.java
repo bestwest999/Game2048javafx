@@ -1,11 +1,11 @@
 package app2048;
 
-import javafx.beans.property.SimpleIntegerProperty;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 
-public class Tile  {
+ class Tile  {
   //  SimpleIntegerProperty number = new SimpleIntegerProperty(2);
     private  Label tile ;
 private static Integer id = 1;
@@ -20,7 +20,7 @@ private static Integer id = 1;
         id++;
     }
 
-    public Label getTile() {
+    Label getTile() {
         return tile;
     }
 }
