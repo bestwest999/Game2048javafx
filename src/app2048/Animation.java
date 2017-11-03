@@ -16,14 +16,14 @@ import javafx.util.Duration;
 import java.util.Comparator;
 
 
-public class Animation {
+class Animation {
 
     private GridPane board;
     private ApplicationView view;
 
 
 
-    Runnable removeNodeLeft = new Runnable() {
+    private Runnable removeNodeLeft = new Runnable() {
         @Override
         public void run() {
             try {
@@ -43,7 +43,7 @@ public class Animation {
     };
 
 
-    Runnable removeNodeRight = new Runnable() {
+    private Runnable removeNodeRight = new Runnable() {
         @Override
         public void run() {
             try {
@@ -63,7 +63,7 @@ public class Animation {
     };
 
 
-    Runnable removeNodeUp = new Runnable() {
+    private Runnable removeNodeUp = new Runnable() {
         @Override
         public void run() {
             try {
@@ -83,7 +83,7 @@ public class Animation {
     };
 
 
-    Runnable removeNodeDown = new Runnable() {
+    private Runnable removeNodeDown = new Runnable() {
         @Override
         public void run() {
 
@@ -105,11 +105,11 @@ public class Animation {
     };
 
 
-    Runnable addRndNode = new Runnable() {
+    private  Runnable addRndNode = new Runnable() {
         @Override
         public void run() {
             try {
-                Thread.sleep(600);
+                Thread.sleep(700);
             } catch (InterruptedException f) { }
 
             Platform.runLater(new Runnable() {
@@ -124,7 +124,7 @@ public class Animation {
         }
     };
 
-    public Animation(ApplicationView applicationView) {
+     Animation(ApplicationView applicationView) {
         view = applicationView;
         board = view.getBoard();
 
@@ -136,7 +136,7 @@ public class Animation {
      @param firstRowDist, secondRowDist, thirdRowDist, fouthRoWDist - distance filled by tilse that are allready moved left
      */
 
-    public void moveLeft() {
+    private  void moveLeft() {
         GridPane board = this.view.getBoard();
 
 
@@ -146,7 +146,7 @@ public class Animation {
                 return ((int) node1.getBoundsInParent().getMinX() - (int) node2.getBoundsInParent().getMinX());
             }
         };
-        SortedList<Node> sorted = new SortedList<Node>(board.getChildren(), comparator);
+        SortedList<Node> sorted = new SortedList<>(board.getChildren(), comparator);
 
         double firstRowDist = 0;
         double secondRowDist = 0;
@@ -188,7 +188,7 @@ public class Animation {
      @param firstRowDist, secondRowDist, thirdRowDist, fouthRoWDist - distance not filled by tilse that are allready moved right
      */
 
-    public void moveRight() {
+    private void moveRight() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
         Comparator<Node> comparator = new Comparator<Node>() {
@@ -197,7 +197,7 @@ public class Animation {
                 return ((int) node1.getBoundsInParent().getMinX() - (int) node2.getBoundsInParent().getMinX());
             }
         };
-        SortedList<Node> sorted = new SortedList<Node>(childrens, comparator.reversed());
+        SortedList<Node> sorted = new SortedList<>(childrens, comparator.reversed());
         double firstRowDist = 300;
         double secondRowDist = 300;
         double thirdRowDist = 300;
@@ -229,7 +229,7 @@ public class Animation {
     }
 
 
-      public void moveUp() {
+      private void moveUp() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
 
@@ -239,7 +239,7 @@ public class Animation {
                 return ((int) node1.getBoundsInParent().getMinY() - (int) node2.getBoundsInParent().getMinY());
             }
         };
-        SortedList<Node> sorted = new SortedList<Node>(childrens, comparator);
+        SortedList<Node> sorted = new SortedList<>(childrens, comparator);
 
         double firstColDist = 0;
         double secondColDist = 0;
@@ -272,7 +272,7 @@ public class Animation {
     }
 
 
-    public void moveDown() {
+    private void moveDown() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
 
@@ -282,7 +282,7 @@ public class Animation {
                 return ((int) node1.getBoundsInParent().getMinY() - (int) node2.getBoundsInParent().getMinY());
             }
         };
-        SortedList<Node> sorted = new SortedList<Node>(childrens, comparator.reversed());
+        SortedList<Node> sorted = new SortedList<>(childrens, comparator.reversed());
 
         double firstColDist = 300;
         double secondColDist = 300;
@@ -315,7 +315,7 @@ public class Animation {
     }
 
 
-    public void handle(KeyEvent e) {
+     void handle(KeyEvent e) {
 
         String type = e.getEventType().getName();
         KeyCode keyCode = e.getCode();
