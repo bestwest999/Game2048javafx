@@ -23,6 +23,7 @@ class Animation {
     private ApplicationView view;
 
 
+
     private Runnable removeNodeLeft = new Runnable() {
         @Override
         public void run() {
