@@ -24,7 +24,7 @@ public class App2048 extends Application {
         scene.setOnKeyPressed(e-> animation.handle(e) );
 
 
-        stage.setTitle("Adding Children to a GridPane");
+        stage.setTitle("2048 GAME");
         stage.show();
 
     }
