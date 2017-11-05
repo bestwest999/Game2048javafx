@@ -219,7 +219,7 @@ class Animation {
         System.out.println("Moved left");
     }
 
-    
+
     private void moveRight() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
