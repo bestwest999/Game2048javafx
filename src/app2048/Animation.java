@@ -170,10 +170,7 @@ class Animation {
 
     }
 
-    /*
-     moveLeft() move all present tiles to left
-     @param firstRowDist, secondRowDist, thirdRowDist, fouthRoWDist - distance filled by tilse that are allready moved left
-     */
+
 
     private void moveLeft() {
         GridPane board = this.view.getBoard();
@@ -222,11 +219,7 @@ class Animation {
         System.out.println("Moved left");
     }
 
-       /*
-     moveRight() move all present tiles to left
-     @param firstRowDist, secondRowDist, thirdRowDist, fouthRoWDist - distance not filled by tilse that are allready moved right
-     */
-
+    
     private void moveRight() {
         GridPane board = this.view.getBoard();
         ObservableList<Node> childrens = board.getChildren();
