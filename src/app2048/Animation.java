@@ -38,6 +38,7 @@ class Animation {
                     nodeoper.removeNodeLeftRight(board, "left");
                     System.out.println("Nodes removed");
                     moveLeft();
+                    new Thread(addRndNode).start();
                     try {
                         new Thread(addRndNode).join();
                         System.out.println("node is added");
@@ -66,6 +67,7 @@ class Animation {
                     nodeoper.removeNodeLeftRight(board, "right");
                     System.out.println("Nodes removed");
                     moveRight();
+                    new Thread(addRndNode).start();
                     try {
                         new Thread(addRndNode).join();
                         System.out.println("node is added");
@@ -95,7 +97,7 @@ class Animation {
                     nodeoper.removeNodeUpDown(board, "up");
                     System.out.println("Nodes removed");
                     moveUp();
-
+                    new Thread(addRndNode).start();
                     try {
                         new Thread(addRndNode).join();
                         System.out.println("node is added");
@@ -127,6 +129,7 @@ class Animation {
                     nodeoper.removeNodeUpDown(board, "down");
                     System.out.println("Nodes removed");
                     moveDown();
+                    new Thread(addRndNode).start();
                     try {
                         new Thread(addRndNode).join();
                         System.out.println("node is added");
@@ -353,19 +356,19 @@ class Animation {
         KeyCode keyCode = e.getCode();
         if (e.getCode() == KeyCode.LEFT) {
             moveLeft();
-            new Thread(addRndNode).start();
+         //   new Thread(addRndNode).start();
             new Thread(removeNodeLeft).start();
         } else if (e.getCode() == KeyCode.RIGHT) {
             moveRight();
-            new Thread(addRndNode).start();
+       //     new Thread(addRndNode).start();
             new Thread(removeNodeRight).start();
         } else if (e.getCode() == KeyCode.UP) {
             moveUp();
-            new Thread(addRndNode).start();
+         //   new Thread(addRndNode).start();
             new Thread(removeNodeUp).start();
         } else if (e.getCode() == KeyCode.DOWN) {
             moveDown();
-            new Thread(addRndNode).start();
+         //   new Thread(addRndNode).start();
             new Thread(removeNodeDown).start();
 
         }
