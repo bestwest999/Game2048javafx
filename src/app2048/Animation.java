@@ -1,7 +1,6 @@
 package app2048;
 
 
-
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -19,9 +18,9 @@ import java.util.Comparator;
 
 class Animation {
 
+    private volatile Boolean  busy = false;
     private GridPane board;
     private ApplicationView view;
-
 
 
     private Runnable removeNodeLeft = new Runnable() {
@@ -50,7 +49,6 @@ class Animation {
 
         }
     };
-
 
 
     private Runnable removeNodeRight = new Runnable() {
@@ -162,6 +160,7 @@ class Animation {
             });
 
             System.out.println("adding");
+            busy= false;
         }
 
     };
@@ -172,7 +171,6 @@ class Animation {
 
 
     }
-
 
 
     private void moveLeft() {
@@ -351,26 +349,33 @@ class Animation {
 
 
     void handle(KeyEvent e) {
+        if (busy) {
+            e.consume();
+        } else {
+            String type = e.getEventType().getName();
+            KeyCode keyCode = e.getCode();
+            if (e.getCode() == KeyCode.LEFT) {
+                busy= true;
+                moveLeft();
+                //   new Thread(addRndNode).start();
+                new Thread(removeNodeLeft).start();
+            } else if (e.getCode() == KeyCode.RIGHT) {
+                busy= true;
+                moveRight();
+                //     new Thread(addRndNode).start();
+                new Thread(removeNodeRight).start();
+            } else if (e.getCode() == KeyCode.UP) {
+                busy= true;
+                moveUp();
+                //   new Thread(addRndNode).start();
+                new Thread(removeNodeUp).start();
+            } else if (e.getCode() == KeyCode.DOWN) {
+                busy= true;
+                moveDown();
+                //   new Thread(addRndNode).start();
+                new Thread(removeNodeDown).start();
 
-        String type = e.getEventType().getName();
-        KeyCode keyCode = e.getCode();
-        if (e.getCode() == KeyCode.LEFT) {
-            moveLeft();
-         //   new Thread(addRndNode).start();
-            new Thread(removeNodeLeft).start();
-        } else if (e.getCode() == KeyCode.RIGHT) {
-            moveRight();
-       //     new Thread(addRndNode).start();
-            new Thread(removeNodeRight).start();
-        } else if (e.getCode() == KeyCode.UP) {
-            moveUp();
-         //   new Thread(addRndNode).start();
-            new Thread(removeNodeUp).start();
-        } else if (e.getCode() == KeyCode.DOWN) {
-            moveDown();
-         //   new Thread(addRndNode).start();
-            new Thread(removeNodeDown).start();
-
+            }
         }
 
 
